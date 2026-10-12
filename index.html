@@ -3001,6 +3001,7 @@
         // --- SPA screen navigation ---
         const spaScreens = [...document.querySelectorAll('body > section')];
         const spaLinks = [...document.querySelectorAll('.nav-link, .mobile-nav-link')];
+        const spaHashLinks = [...document.querySelectorAll('a[href^="#"]')].filter(link => link.hash);
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
         const spaLabels = ['Beranda', 'Terminal', 'Proyek IoT', 'Publikasi', 'Pengalaman', 'Perjalanan', 'Keahlian', 'Kontak'];
@@ -3056,78 +3057,14 @@
             });
             if (updateHash) history.replaceState(null, '', `#${spaScreens[spaIndex].id}`);
         }
-        spaLinks.forEach(link => link.addEventListener('click', event => {
+        spaHashLinks.forEach(link => link.addEventListener('click', event => {
             const destination = spaScreens.findIndex(screen => `#${screen.id}` === link.hash);
             if (destination >= 0) { event.preventDefault(); showSpaScreen(destination); }
         }));
         document.querySelector('.nav-brand').addEventListener('click', event => { event.preventDefault(); showSpaScreen(0); });
-        document.addEventListener('keydown', event => {
-            const active = spaScreens[spaIndex];
-            if (!active || ['INPUT', 'TEXTAREA', 'SELECT'].includes(event.target.tagName)) return;
-
-            if (event.key === 'ArrowRight') showSpaScreen(spaIndex + 1);
-            if (event.key === 'ArrowLeft') showSpaScreen(spaIndex - 1);
-            if (event.key === 'PageDown' && active.scrollTop + active.clientHeight >= active.scrollHeight - 2) {
-                showSpaScreen(spaIndex + 1);
-            }
-            if (event.key === 'PageUp' && active.scrollTop <= 2) {
-                showSpaScreen(spaIndex - 1);
-            }
-        });
-        let spaWheelLock = false;
-        let touchStartY = null;
-
-        function isScrollableElement(node) {
-            if (!(node instanceof Element)) return false;
-            const style = getComputedStyle(node);
-            return /(auto|scroll)/.test(style.overflowY) && node.scrollHeight > node.clientHeight + 2;
-        }
-
-        function canContinueScrolling(node, direction) {
-            if (!isScrollableElement(node)) return false;
-            return direction > 0
-                ? node.scrollTop + node.clientHeight < node.scrollHeight - 2
-                : node.scrollTop > 2;
-        }
-
-        window.addEventListener('wheel', event => {
-            if (spaWheelLock || Math.abs(event.deltaY) < 25) return;
-            const active = spaScreens[spaIndex];
-            const direction = Math.sign(event.deltaY);
-
-            // Let nested panels (such as the terminal output) finish scrolling first.
-            for (let node = event.target; node && node !== active; node = node.parentElement) {
-                if (canContinueScrolling(node, direction)) return;
-            }
-
-            const atBottom = active.scrollTop + active.clientHeight >= active.scrollHeight - 2;
-            const atTop = active.scrollTop <= 2;
-            if ((direction > 0 && !atBottom) || (direction < 0 && !atTop)) return;
-
-            event.preventDefault();
-            showSpaScreen(spaIndex + direction);
-            spaWheelLock = true;
-            setTimeout(() => { spaWheelLock = false; }, 650);
-        }, { passive: false });
-
-        window.addEventListener('touchstart', event => {
-            if (event.touches.length === 1) touchStartY = event.touches[0].clientY;
-        }, { passive: true });
-        window.addEventListener('touchend', event => {
-            if (touchStartY === null || spaWheelLock || !event.changedTouches.length) return;
-            const deltaY = touchStartY - event.changedTouches[0].clientY;
-            touchStartY = null;
-            if (Math.abs(deltaY) < 48) return;
-
-            const active = spaScreens[spaIndex];
-            const atBottom = active.scrollTop + active.clientHeight >= active.scrollHeight - 2;
-            const atTop = active.scrollTop <= 2;
-            if ((deltaY > 0 && atBottom) || (deltaY < 0 && atTop)) {
-                showSpaScreen(spaIndex + (deltaY > 0 ? 1 : -1));
-                spaWheelLock = true;
-                setTimeout(() => { spaWheelLock = false; }, 650);
-            }
-        }, { passive: true });
+        // Navigasi layar hanya dilakukan melalui menu/CTA yang dipilih pengguna.
+        // Wheel, swipe, PageUp/PageDown, dan tombol panah tetap dipakai untuk
+        // menghabiskan atau menjelajahi isi layar aktif, tetapi tidak mengganti layar.
         showSpaScreen(spaIndex, false);
 
         // --- 8. THEMED INITIAL LOADER ---
