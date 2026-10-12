@@ -122,42 +122,26 @@
             top: 0; 
             bottom: 0;
             left: var(--split);
-            width: 5px;
-            background: linear-gradient(to bottom, var(--color-cyber) 0%, #d4b48b 50%, var(--color-cyber) 100%);
+            width: 24px;
             transform: translateX(-50%);
             z-index: 30;
-            box-shadow: 0 0 18px rgba(123, 0, 5, 0.18);
             cursor: col-resize;
         }
 
-        .divider-handle {
+        .split-divider-visual {
             position: absolute;
-            top: calc(50% + 28px);
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 62px;
-            height: 62px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.96);
-            border: 2px solid rgba(255,255,255,0.8);
-            box-shadow: 0 5px 24px rgba(34, 47, 39, 0.18);
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-cyber);
-            cursor: grab;
-            transition: transform 0.15s ease, box-shadow 0.2s ease;
-            font-size: 10px;
-            font-weight: 700;
-            letter-spacing: 0.08em;
-            text-transform: uppercase;
+            top: 0;
+            bottom: 0;
+            left: var(--split);
+            width: 5px;
+            transform: translateX(-50%);
+            z-index: 20;
+            pointer-events: none;
+            background: linear-gradient(to bottom, var(--color-cyber) 0%, #d4b48b 50%, var(--color-cyber) 100%);
+            box-shadow: 0 0 18px rgba(123, 0, 5, 0.18);
         }
 
-        .divider-handle:hover {
-            transform: translate(-50%, -50%) scale(1.05);
-            box-shadow: 0 7px 28px rgba(34, 47, 39, 0.24);
-        }
+
 
         /* Center Photo Container */
         .stage-photo-wrapper {
@@ -169,7 +153,7 @@
             width: 100%;
             max-width: 540px;
             pointer-events: none;
-            z-index: 10;
+            z-index: 25;
             display: flex;
             align-items: flex-end;
             justify-content: center;
@@ -737,8 +721,6 @@
                 padding-inline: 0.5rem;
             }
         }
-        #hero-split-container .divider-handle { color: var(--color-ink); }
-        #hero-split-container .divider-handle .text-white { color: var(--color-ink) !important; }
         #hero-split-container > .absolute {
             background: rgba(248, 246, 240, 0.96) !important;
             color: var(--color-ink) !important;
@@ -1147,12 +1129,6 @@
         }
         #split-divider {
             filter: drop-shadow(0 0 10px rgba(123, 0, 5, 0.18));
-        }
-        #split-divider .divider-handle {
-            width: 66px;
-            height: 66px;
-            border-color: rgba(123, 0, 5, 0.18);
-            box-shadow: 0 12px 28px rgba(53, 0, 4, 0.2);
         }
         section.bg-dark,
         section.bg-darker {
@@ -1593,6 +1569,50 @@
             }
         }
 
+        /* Keep the five requested destinations visible in the top taskbar. */
+        #site-nav .nav-inner { justify-content: space-between; }
+        #site-nav .nav-links {
+            display: flex !important;
+            flex: 1;
+            justify-content: flex-end;
+            gap: clamp(0.65rem, 1.5vw, 1.35rem);
+            margin-left: 1.5rem;
+        }
+        #site-nav .nav-action-wrap,
+        #menu-toggle,
+        #mobile-menu,
+        #spa-progress-nav { display: none !important; }
+        @media (max-width: 767px) {
+            #site-nav .nav-inner { gap: 0.5rem; }
+            #site-nav .nav-links {
+                justify-content: flex-start;
+                gap: 0.85rem;
+                margin-left: 0.75rem;
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+            #site-nav .nav-links::-webkit-scrollbar { display: none; }
+            #site-nav .nav-link { font-size: 0.72rem; }
+        }
+
+        /* Full page menu: icon-only trigger, complete destination list. */
+        #site-nav #menu-toggle {
+            display: inline-flex !important;
+            align-items: center;
+            justify-content: center;
+            width: 2.75rem;
+            height: 2.75rem;
+            padding: 0;
+            border: 0;
+            border-radius: 999px;
+            color: #f5e8d2;
+            background: var(--color-cyber);
+            font-size: 1rem;
+        }
+        #site-nav #menu-toggle span { display: none; }
+        #site-nav #mobile-menu { display: none !important; }
+        #site-nav #mobile-menu.is-open { display: grid !important; gap: 0.25rem; }
+
         /* Compact scroll status integrated into the top taskbar. */
         #spa-progress-nav {
             display: flex;
@@ -1659,7 +1679,6 @@
         #mobile-menu a:focus-visible { background: rgba(123, 0, 5, 0.09); outline: none; }
         #mobile-menu .mobile-menu-external { margin-top: 0.3rem; color: #f5e8d2; background: var(--color-cyber); }
         @media (min-width: 1024px) {
-            #site-nav .nav-links { display: none !important; }
             #mobile-menu { right: 1.5rem; left: auto; width: 21rem; }
         }
         @media (max-width: 640px) {
@@ -1668,6 +1687,76 @@
             #site-nav .nav-brand > span:last-child { max-width: 11rem; overflow: hidden; text-overflow: ellipsis; }
             #site-nav .nav-action span { display: none; }
             #site-nav .nav-action { padding-inline: 0.65rem; }
+        }
+
+        /* Balanced taskbar spacing. */
+        #site-nav .nav-links {
+            flex: 0 1 auto;
+            justify-content: center;
+            gap: 0.3rem;
+            margin-left: auto;
+            margin-right: 1rem;
+            padding: 0.2rem 0.35rem;
+        }
+        #site-nav .nav-link { padding: 0.4rem 0.75rem; }
+        #site-nav #menu-toggle { flex: 0 0 2.75rem; }
+        #site-nav .nav-link,
+        #site-nav .nav-link:hover,
+        #site-nav .nav-link:focus-visible {
+            position: relative;
+            background: transparent;
+        }
+        #site-nav .nav-link::after {
+            display: block;
+            right: 0.65rem;
+            bottom: 0.16rem;
+            left: 0.65rem;
+            width: auto;
+            height: 2px;
+            border-radius: 999px;
+            background: currentColor;
+            content: "";
+            transform: translateX(0) scaleX(0);
+            transform-origin: center;
+            box-shadow: 0 0 0 rgba(245, 232, 210, 0);
+            transition: transform 780ms cubic-bezier(.16,.72,.22,1), box-shadow 780ms ease;
+        }
+        #site-nav .nav-link:hover::after,
+        #site-nav .nav-link:focus-visible::after {
+            transform: translateX(0) scaleX(1);
+            box-shadow: none;
+        }
+
+        /* Gentle bubble response for hero text and controls. */
+        #hero-split-container .hero-copy-flow > * {
+            border-radius: 1rem;
+            transition: transform 360ms cubic-bezier(.2,.75,.25,1), background-color 360ms ease, box-shadow 360ms ease;
+        }
+        #hero-split-container .hero-copy-flow > *:hover,
+        #hero-split-container .hero-copy-flow > *:focus-within {
+            transform: translateY(-3px) scale(1.018);
+            background-color: rgba(255, 255, 255, .09);
+            box-shadow: 0 10px 24px rgba(53, 0, 4, .12);
+        }
+        @media (min-width: 768px) {
+            #site-nav .nav-inner { position: relative; }
+            #site-nav .nav-links {
+                position: absolute;
+                left: 50%;
+                margin: 0;
+                transform: translateX(-50%);
+            }
+        }
+        @media (max-width: 767px) {
+            #site-nav .nav-links {
+                flex: 1 1 auto;
+                justify-content: flex-start;
+                gap: 0.2rem;
+                margin-left: 0.6rem;
+                margin-right: 0.5rem;
+                padding: 0.15rem 0.25rem;
+            }
+            #site-nav .nav-link { padding: 0.35rem 0.55rem; }
         }
 
         /* Themed first-load experience. */
@@ -1711,14 +1800,12 @@
             </a>
 
             <!-- Nav Links -->
-            <div class="nav-links hidden lg:flex items-center text-sm font-medium text-gray-300">
+            <div class="nav-links items-center text-sm font-medium text-gray-300" aria-label="Navigasi utama">
                 <a href="#hero-split-container" class="nav-link hover:text-cyber transition-all">Beranda</a>
                 <a href="#cli-terminal" class="nav-link hover:text-cyber transition-all">Terminal</a>
                 <a href="#iot-spirometry" class="nav-link hover:text-neonGreen transition-all">Proyek IoT</a>
-                <a href="#publications" class="nav-link hover:text-gold transition-all">Publikasi</a>
                 <a href="#timeline-section" class="nav-link hover:text-gold transition-all">Pengalaman</a>
                 <a href="#journey-navigator" class="nav-link hover:text-gold transition-all">Perjalanan</a>
-                <a href="#skills-section" class="nav-link hover:text-gold transition-all">Keahlian</a>
                 <a href="#contact" class="nav-link hover:text-waGreen transition-all">Kontak</a>
             </div>
 
@@ -1730,14 +1817,12 @@
                 <div class="spa-progress-track" aria-hidden="true"><span id="spa-progress-bar" class="spa-progress-bar"></span></div>
             </div>
 
-            <!-- Menu Button -->
-            <div class="flex items-center gap-2.5">
-                <button id="menu-toggle" type="button" aria-expanded="false" aria-controls="mobile-menu">
-                    <i class="fas fa-bars" aria-hidden="true"></i><span>Menu</span>
-                </button>
-            </div>
+            <button id="menu-toggle" type="button" aria-label="Buka semua opsi halaman" aria-expanded="false" aria-controls="mobile-menu">
+                <i class="fas fa-bars" aria-hidden="true"></i>
+            </button>
+
         </div>
-        <div id="mobile-menu" aria-label="Menu navigasi">
+        <div id="mobile-menu" aria-label="Semua opsi halaman">
             <a class="mobile-nav-link" href="#hero-split-container">Beranda</a>
             <a class="mobile-nav-link" href="#cli-terminal">Terminal</a>
             <a class="mobile-nav-link" href="#iot-spirometry">Proyek IoT</a>
@@ -1746,7 +1831,6 @@
             <a class="mobile-nav-link" href="#journey-navigator">Perjalanan</a>
             <a class="mobile-nav-link" href="#skills-section">Keahlian</a>
             <a class="mobile-nav-link" href="#contact">Kontak</a>
-            <a class="mobile-menu-external" href="https://ungu.in/smartspirometry" target="_blank" rel="noopener noreferrer">Buka IoT Demo <i class="fas fa-external-link-alt ml-auto" aria-hidden="true"></i></a>
         </div>
     </nav>
 
@@ -1857,12 +1941,8 @@
         </div>
 
         <!-- DRAGGABLE INTERACTIVE SLIDER DIVIDER BAR -->
-        <div class="split-divider-line" id="split-divider">
-            <div class="divider-handle" id="divider-handle" title="Geser atau Klik untuk Sesuaikan Rasio">
-                <i class="fas fa-arrows-alt-h text-white text-sm"></i>
-                <span class="text-[8px] font-mono font-bold text-cyber uppercase tracking-tighter mt-0.5">GESER</span>
-            </div>
-        </div>
+        <div class="split-divider-visual" aria-hidden="true"></div>
+        <div class="split-divider-line" id="split-divider" aria-label="Geser untuk menyesuaikan rasio"></div>
 
         <!-- PERCENTAGE STATUS BAR & QUICK PRESETS -->
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-wrap items-center justify-center gap-3 bg-dark/90 px-5 py-2.5 rounded-full border border-white/15 backdrop-blur-md shadow-2xl font-mono text-xs">
@@ -2559,39 +2639,57 @@
         // --- 1. SPLIT-SCREEN DRAGGABLE HERO SLIDER LOGIC ---
         const splitContainer = document.getElementById('hero-split-container');
         const divider = document.getElementById('split-divider');
-        const handle = document.getElementById('divider-handle');
         const pctTech = document.getElementById('pct-tech');
         const pctLeader = document.getElementById('pct-leadership');
         const barTech = document.getElementById('bar-tech');
         const barLeader = document.getElementById('bar-leadership');
 
         let isDragging = false;
+        let targetSplit = 50;
+        let currentSplit = 50;
+        let splitAnimationFrame = null;
 
-        function updateSplit(x) {
-            const rect = splitContainer.getBoundingClientRect();
-            let percentage = ((x - rect.left) / rect.width) * 100;
-            percentage = Math.max(0, Math.min(100, percentage));
-            
+        function renderSplit(percentage) {
             document.documentElement.style.setProperty('--split', `${percentage}%`);
-            
             const techVal = Math.round(percentage);
             const leaderVal = 100 - techVal;
-
             pctTech.textContent = `${techVal}%`;
             pctLeader.textContent = `${leaderVal}%`;
             barTech.style.width = `${techVal}%`;
             barLeader.style.width = `${leaderVal}%`;
         }
 
-        function setSplitPercent(pct) {
-            document.documentElement.style.setProperty('--split', `${pct}%`);
-            pctTech.textContent = `${pct}%`;
-            pctLeader.textContent = `${100 - pct}%`;
-            barTech.style.width = `${pct}%`;
-            barLeader.style.width = `${100 - pct}%`;
+        function animateSplit() {
+            if (splitAnimationFrame !== null) return;
+            const step = () => {
+                const distance = targetSplit - currentSplit;
+                currentSplit += distance * 0.14;
+                if (Math.abs(distance) < 0.04) {
+                    currentSplit = targetSplit;
+                    renderSplit(currentSplit);
+                    splitAnimationFrame = null;
+                    return;
+                }
+                renderSplit(currentSplit);
+                splitAnimationFrame = requestAnimationFrame(step);
+            };
+            splitAnimationFrame = requestAnimationFrame(step);
         }
 
-        handle.addEventListener('mousedown', (e) => {
+        function updateSplit(x) {
+            const rect = splitContainer.getBoundingClientRect();
+            let percentage = ((x - rect.left) / rect.width) * 100;
+            percentage = Math.max(0, Math.min(100, percentage));
+            targetSplit = percentage;
+            animateSplit();
+        }
+
+        function setSplitPercent(pct) {
+            targetSplit = pct;
+            animateSplit();
+        }
+
+        divider.addEventListener('mousedown', (e) => {
             isDragging = true;
             e.preventDefault();
         });
@@ -2604,8 +2702,13 @@
             }
         });
 
+        // Let the divider follow the pointer direction across the hero while idle.
+        splitContainer.addEventListener('pointermove', (e) => {
+            if (!isDragging && e.pointerType !== 'touch') updateSplit(e.clientX);
+        });
+
         // Mobile touch support for slider
-        handle.addEventListener('touchstart', () => isDragging = true);
+        divider.addEventListener('touchstart', () => isDragging = true);
         window.addEventListener('touchend', () => isDragging = false);
         window.addEventListener('touchmove', (e) => {
             if (isDragging && e.touches.length > 0) {
@@ -3000,7 +3103,7 @@
 
         // --- SPA screen navigation ---
         const spaScreens = [...document.querySelectorAll('body > section')];
-        const spaLinks = [...document.querySelectorAll('.nav-link, .mobile-nav-link')];
+        const spaLinks = [...document.querySelectorAll('.nav-link')];
         const spaHashLinks = [...document.querySelectorAll('a[href^="#"]')].filter(link => link.hash);
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
