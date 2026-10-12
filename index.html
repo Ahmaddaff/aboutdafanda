@@ -536,7 +536,9 @@
             transform: translateY(34px) scale(.96);
         }
         .scroll-reveal.is-visible {
-            animation: content-reveal .78s cubic-bezier(.2,.75,.25,1) both;
+            opacity: 1;
+            transform: none;
+            animation: content-reveal .78s cubic-bezier(.2,.75,.25,1) backwards;
             animation-delay: calc(var(--scroll-reveal-order, 0) * 120ms);
         }
         @keyframes content-reveal {
@@ -1473,7 +1475,6 @@
         }
         #hero-split-container .hero-copy-flow > .grid > a,
         #site-nav .nav-action,
-        #contact a,
         #cli-terminal .quick-command-list > button {
             background-image: linear-gradient(
                 110deg,
@@ -1486,14 +1487,15 @@
         }
         #hero-split-container .hero-copy-flow > .grid > a:hover,
         #site-nav .nav-action:hover,
-        #contact a:hover,
         #cli-terminal .quick-command-list > button:hover {
             animation: action-sheen 750ms ease-out;
         }
-        #contact a > i {
+        #contact a > i,
+        #contact .grid > div > i {
             transition: transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1);
         }
-        #contact a:hover > i {
+        #contact a:hover > i,
+        #contact .grid > div:hover > i {
             transform: translateY(-4px) rotate(-5deg) scale(1.12);
         }
         #journey-navigator .journey-tab[aria-selected="true"]::before {
@@ -1775,9 +1777,147 @@
         @keyframes loader-progress { 0% { transform: translateX(-130%); } 100% { transform: translateX(360%); } }
         @keyframes loader-shine { 0% { background-position: 140% 0; } 100% { background-position: -40% 0; } }
         @media (prefers-reduced-motion: reduce) { #site-loader, .loader-progress, .loader-track::after { animation: none; transition: none; } }
+
+        @media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+            body.has-custom-cursor,
+            body.has-custom-cursor a,
+            body.has-custom-cursor button,
+            body.has-custom-cursor input,
+            body.has-custom-cursor textarea,
+            body.has-custom-cursor select,
+            body.has-custom-cursor [role="button"],
+            body.has-custom-cursor .split-divider-line {
+                cursor: none !important;
+            }
+
+            .custom-cursor {
+                position: fixed;
+                inset: 0 auto auto 0;
+                z-index: 10000;
+                width: 0;
+                height: 0;
+                pointer-events: none;
+                opacity: 0;
+                transition: opacity 180ms ease;
+            }
+
+            .custom-cursor.is-visible {
+                opacity: 1;
+            }
+
+            .custom-cursor-ring,
+            .custom-cursor-dot {
+                position: absolute;
+                top: 0;
+                left: 0;
+                border-radius: 50%;
+                transform: translate3d(-50%, -50%, 0);
+                will-change: transform;
+            }
+
+            .custom-cursor-ring {
+                display: grid;
+                width: 38px;
+                height: 38px;
+                place-items: center;
+                border: 1px solid rgba(123, 0, 5, 0.75);
+                background: rgba(241, 231, 215, 0.12);
+                box-shadow: 0 0 0 5px rgba(123, 0, 5, 0.06), inset 0 0 12px rgba(212, 180, 139, 0.2);
+                transition: transform 90ms ease-out, width 260ms cubic-bezier(.2,.8,.2,1), height 260ms cubic-bezier(.2,.8,.2,1), border-color 260ms ease, background-color 260ms ease, box-shadow 260ms ease;
+            }
+
+            .custom-cursor-ring::before,
+            .custom-cursor-ring::after {
+                position: absolute;
+                content: "";
+                background: var(--color-cyber);
+                opacity: 0.65;
+            }
+
+            .custom-cursor-ring::before {
+                width: 1px;
+                height: 7px;
+                top: -5px;
+                left: 50%;
+                box-shadow: 0 38px 0 var(--color-cyber);
+            }
+
+            .custom-cursor-ring::after {
+                width: 7px;
+                height: 1px;
+                top: 50%;
+                left: -5px;
+                box-shadow: 38px 0 0 var(--color-cyber);
+            }
+
+            .custom-cursor-dot {
+                width: 5px;
+                height: 5px;
+                background: var(--color-cyber);
+                box-shadow: 0 0 10px rgba(123, 0, 5, 0.45);
+                transition: transform 180ms ease, background-color 180ms ease;
+            }
+
+            .custom-cursor.is-hovering .custom-cursor-ring {
+                width: 54px;
+                height: 54px;
+                border-color: rgba(123, 0, 5, 0.9);
+                background: rgba(212, 180, 139, 0.28);
+                box-shadow: 0 0 0 8px rgba(123, 0, 5, 0.08), 0 0 24px rgba(123, 0, 5, 0.16), inset 0 0 16px rgba(212, 180, 139, 0.35);
+                animation: cursor-bubble 1.8s ease-in-out infinite;
+            }
+
+            .custom-cursor.is-hovering .custom-cursor-dot {
+                transform: translate3d(-50%, -50%, 0) scale(1.6);
+                background: #9b5147;
+            }
+
+            .custom-cursor.is-pressed .custom-cursor-ring {
+                width: 30px;
+                height: 30px;
+            }
+        }
+
+        @keyframes cursor-bubble {
+            0%, 100% { border-radius: 50%; }
+            50% { border-radius: 43% 57% 52% 48% / 54% 44% 56% 46%; }
+        }
+
+        /* Kontak: umpan balik hover yang seragam untuk keempat kotak.
+           Tiga kotak berupa tautan (<a>) dan satu kotak lokasi berupa <div>,
+           jadi keduanya diberi aturan yang sama agar animasinya identik. */
+        #contact .grid > a,
+        #contact .grid > div {
+            transition:
+                transform 220ms cubic-bezier(0.2, 0.7, 0.2, 1),
+                box-shadow 220ms ease,
+                border-color 220ms ease,
+                background-color 220ms ease;
+        }
+        #contact .grid > a:hover,
+        #contact .grid > div:hover {
+            transform: translateY(-4px);
+            border-color: rgba(123, 0, 5, 0.5) !important;
+            background-color: rgba(246, 237, 224, 0.98);
+            box-shadow: 0 22px 46px rgba(65, 14, 18, 0.16);
+        }
+        @media (prefers-reduced-motion: reduce) {
+            #contact .grid > a,
+            #contact .grid > div {
+                transition: none;
+            }
+            #contact .grid > a:hover,
+            #contact .grid > div:hover {
+                transform: none;
+            }
+        }
     </style>
 </head>
 <body class="antialiased selection:bg-cyber selection:text-black">
+    <div class="custom-cursor" id="custom-cursor" aria-hidden="true">
+        <span class="custom-cursor-ring"></span>
+        <span class="custom-cursor-dot"></span>
+    </div>
 
     <div id="site-loader" role="status" aria-live="polite" aria-label="Memuat website">
         <div class="loader-panel">
@@ -2602,7 +2742,46 @@
 
     <!-- JAVASCRIPT LOGIC INTERAKTIF -->
     <script>
-        // --- 0. SCROLL REVEAL ANIMATIONS ---
+        // --- 0. CUSTOM DESKTOP CURSOR ---
+        const customCursor = document.getElementById('custom-cursor');
+        const customCursorRing = customCursor.querySelector('.custom-cursor-ring');
+        const customCursorDot = customCursor.querySelector('.custom-cursor-dot');
+        const supportsCustomCursor = window.matchMedia(
+            '(hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference)'
+        ).matches;
+
+        if (supportsCustomCursor) {
+            document.body.classList.add('has-custom-cursor');
+
+            document.addEventListener('pointermove', event => {
+                const { clientX, clientY } = event;
+                customCursorRing.style.transform = `translate3d(${clientX}px, ${clientY}px, 0) translate(-50%, -50%)`;
+                customCursorDot.style.transform = `translate3d(${clientX}px, ${clientY}px, 0) translate(-50%, -50%)`;
+                customCursor.classList.add('is-visible');
+            });
+
+            document.addEventListener('pointerover', event => {
+                if (event.target.closest('a, button, input, textarea, select, [role="button"], .split-divider-line, [data-cursor-hover]')) {
+                    customCursor.classList.add('is-hovering');
+                }
+            });
+
+            document.addEventListener('pointerout', event => {
+                const nextTarget = event.relatedTarget;
+                if (event.target.closest('a, button, input, textarea, select, [role="button"], .split-divider-line, [data-cursor-hover]') &&
+                    (!(nextTarget instanceof Element) ||
+                        !nextTarget.closest('a, button, input, textarea, select, [role="button"], .split-divider-line, [data-cursor-hover]'))) {
+                    customCursor.classList.remove('is-hovering');
+                }
+            });
+
+            document.addEventListener('pointerdown', () => customCursor.classList.add('is-pressed'));
+            document.addEventListener('pointerup', () => customCursor.classList.remove('is-pressed'));
+            document.addEventListener('pointerleave', () => customCursor.classList.remove('is-visible'));
+            document.addEventListener('pointerenter', () => customCursor.classList.add('is-visible'));
+        }
+
+        // --- 1. SCROLL REVEAL ANIMATIONS ---
         const scrollRevealTargets = document.querySelectorAll([
             '#cli-terminal > div > *',
             '#iot-spirometry > div > *, #iot-spirometry .grid > *',
@@ -2636,7 +2815,7 @@
             scrollRevealTargets.forEach(target => scrollRevealObserver.observe(target));
         }
 
-        // --- 1. SPLIT-SCREEN DRAGGABLE HERO SLIDER LOGIC ---
+        // --- 2. SPLIT-SCREEN DRAGGABLE HERO SLIDER LOGIC ---
         const splitContainer = document.getElementById('hero-split-container');
         const divider = document.getElementById('split-divider');
         const pctTech = document.getElementById('pct-tech');
