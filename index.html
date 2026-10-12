@@ -3,7 +3,41 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ahmad Dafanda Abdullah | Web Developer, IoT Engineer & Executive Leader</title>
+    <title>Dafaverse | Web Developer, IoT Engineer & Executive Leader</title>
+    <meta name="description" content="Website personal branding Ahmad Dafanda Abdullah — Web Developer, IoT Engineer (Smart Spirometry), dan Ketua Umum Senat Mahasiswa 2026. Mahasiswa S1 Teknologi Informasi Universitas Amikom Purwokerto.">
+    <meta name="author" content="Ahmad Dafanda Abdullah">
+    <meta name="keywords" content="Ahmad Dafanda Abdullah, Web Developer, IoT Engineer, Smart Spirometry, Amikom Purwokerto, Personal Branding">
+    <meta property="og:title" content="Dafaverse | Web Developer, IoT Engineer & Executive Leader">
+    <meta property="og:description" content="Personal branding Ahmad Dafanda Abdullah — Smart Spirometry IoT, publikasi jurnal ilmiah, dan rekam jejak kepemimpinan mahasiswa.">
+    <meta property="og:image" content="https://aboutdafanda.vercel.app/Foto/Foto%20Ke1.png">
+    <meta property="og:url" content="https://aboutdafanda.vercel.app">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="id_ID">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Dafaverse | Web Developer, IoT Engineer & Executive Leader">
+    <meta name="twitter:description" content="Personal branding Ahmad Dafanda Abdullah — Smart Spirometry IoT, publikasi jurnal ilmiah, dan rekam jejak kepemimpinan mahasiswa.">
+    <meta name="twitter:image" content="https://aboutdafanda.vercel.app/Foto/Foto%20Ke1.png">
+    <link rel="icon" type="image/png" href="Foto/Logo%20Prodi%20TI.png">
+    <link rel="apple-touch-icon" href="Foto/Logo%20Prodi%20TI.png">
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Ahmad Dafanda Abdullah",
+      "alternateName": "Dafaverse",
+      "jobTitle": "Web Developer, IoT Engineer & Executive Leader",
+      "url": "https://aboutdafanda.vercel.app",
+      "email": "mailto:adnafaddamha@gmail.com",
+      "alumniOf": { "@type": "CollegeOrUniversity", "name": "Universitas Amikom Purwokerto" },
+      "sameAs": [
+        "https://github.com/Ahmaddaff",
+        "https://www.linkedin.com/in/ahmad-da-b1a960357",
+        "https://www.instagram.com/siamatcuyy",
+        "https://ungu.in/smartspirometry"
+      ],
+      "knowsAbout": ["IoT Engineering", "Web Development", "Smart Spirometry", "MQTT Telemetry", "Student Leadership"]
+    }
+    </script>
     
     <!-- Google Fonts & Icons -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -1571,7 +1605,9 @@
             }
         }
 
-        /* Keep the five requested destinations visible in the top taskbar. */
+        /* Taskbar: seluruh halaman tampil di navbar pada layar lebar (>=1280px).
+           Di layar lebih kecil (ponsel & tablet, termasuk Android) semua opsi
+           dibuka melalui tombol menu agar taskbar tetap bersih. */
         #site-nav .nav-inner { justify-content: space-between; }
         #site-nav .nav-links {
             display: flex !important;
@@ -1584,17 +1620,8 @@
         #menu-toggle,
         #mobile-menu,
         #spa-progress-nav { display: none !important; }
-        @media (max-width: 767px) {
+        @media (max-width: 1023px) {
             #site-nav .nav-inner { gap: 0.5rem; }
-            #site-nav .nav-links {
-                justify-content: flex-start;
-                gap: 0.85rem;
-                margin-left: 0.75rem;
-                overflow-x: auto;
-                scrollbar-width: none;
-            }
-            #site-nav .nav-links::-webkit-scrollbar { display: none; }
-            #site-nav .nav-link { font-size: 0.72rem; }
         }
 
         /* Full page menu: icon-only trigger, complete destination list. */
@@ -1638,7 +1665,14 @@
         @media (min-width: 1024px) {
             #spa-progress-nav { display: none; }
             #site-nav .nav-inner { gap: 1rem; }
-            #site-nav .nav-links { flex: 1; justify-content: center; gap: clamp(0.7rem, 1.25vw, 1.25rem); }
+            #site-nav .nav-links {
+                flex: 1;
+                justify-content: center;
+                gap: clamp(0.7rem, 1.25vw, 1.25rem);
+                overflow-x: auto;
+                scrollbar-width: none;
+            }
+            #site-nav .nav-links::-webkit-scrollbar { display: none; }
             #site-nav .nav-link { font-size: 0.82rem; }
             #site-nav .nav-brand { flex-shrink: 0; font-size: 0.92rem; }
             #site-nav .nav-action { flex-shrink: 0; }
@@ -1759,6 +1793,21 @@
                 padding: 0.15rem 0.25rem;
             }
             #site-nav .nav-link { padding: 0.35rem 0.55rem; }
+        }
+
+        /* ===== Mode taskbar penuh =====
+           < 1280px (ponsel, tablet, laptop kecil): semua halaman lewat tombol menu.
+           >= 1280px: seluruh halaman tampil di taskbar, tombol menu disembunyikan. */
+        @media (max-width: 1279px) {
+            #site-nav .nav-links { display: none !important; }
+        }
+        @media (min-width: 1280px) {
+            #site-nav #menu-toggle { display: none !important; }
+            #site-nav .nav-links {
+                gap: 0.45rem;
+                padding: 0.2rem 0.3rem;
+            }
+            #site-nav .nav-link { padding: 0.3rem 0.45rem; font-size: 0.76rem; }
         }
 
         /* Themed first-load experience. */
@@ -1911,6 +1960,550 @@
                 transform: none;
             }
         }
+        /* ================= MODERN EFFECTS v2 ================= */
+        /* 1. Film grain overlay — tekstur editorial */
+        .grain-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 60;
+            pointer-events: none;
+            opacity: 0.055;
+            mix-blend-mode: multiply;
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='grain'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23grain)' opacity='0.6'/></svg>");
+            background-size: 200px 200px;
+        }
+
+        /* 2. Hero: cahaya halo mengikuti kursor */
+        .hero-cursor-glow {
+            position: absolute;
+            inset: 0;
+            z-index: 15;
+            pointer-events: none;
+            background: radial-gradient(540px circle at var(--glow-x, 50%) var(--glow-y, 42%), rgba(255, 243, 222, 0.13), transparent 62%);
+        }
+
+        /* 3. Ticker band (marquee) */
+        .ticker-band {
+            position: relative;
+            overflow: hidden;
+            mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+            -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+        }
+        .ticker-track {
+            display: flex;
+            width: max-content;
+            animation: ticker-scroll 32s linear infinite;
+        }
+        .ticker-band:hover .ticker-track,
+        .ticker-band:focus-within .ticker-track { animation-play-state: paused; }
+        .ticker-group {
+            display: flex;
+            align-items: center;
+            gap: 1.6rem;
+            padding-right: 1.6rem;
+        }
+        @keyframes ticker-scroll { to { transform: translateX(-50%); } }
+        .ticker-item {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            font-weight: 700;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            color: var(--color-cyber);
+        }
+        .ticker-dot { color: #B89269; font-size: 0.58rem; }
+
+        /* 4. Stat tiles dengan angka mono besar */
+        .stat-tile .stat-num {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: clamp(1.5rem, 2.6vw, 2.1rem);
+            font-weight: 800;
+            line-height: 1;
+            color: var(--color-cyber);
+        }
+        .stat-tile .stat-suffix { color: #B89269; }
+        .stat-tile .stat-label {
+            margin-top: 0.45rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.62rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            line-height: 1.35;
+            color: var(--color-muted);
+        }
+
+        /* 5. Tilt 3D halus pada kartu */
+        .tilt-card { will-change: transform; }
+
+        /* 6. Spotlight mengikuti kursor pada kartu */
+        #publications .publication-card,
+        #skills-section .glass-panel { position: relative; }
+        #publications .publication-card::after,
+        #skills-section .glass-panel::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            pointer-events: none;
+            background: radial-gradient(240px circle at var(--mx, 50%) var(--my, 50%), rgba(123, 0, 5, 0.075), transparent 70%);
+            opacity: 0;
+            transition: opacity 240ms ease;
+        }
+        #publications .publication-card:hover::after,
+        #skills-section .glass-panel:hover::after { opacity: 1; }
+
+        /* 7. Gradient border berputar pada kartu publikasi */
+        #publications .publication-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 1px;
+            background: conic-gradient(from var(--angle, 0deg), transparent 0deg, rgba(123, 0, 5, 0.55) 40deg, rgba(212, 180, 139, 0.9) 80deg, transparent 150deg);
+            -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            opacity: 0;
+            transition: opacity 260ms ease;
+            pointer-events: none;
+        }
+        #publications .publication-card:hover::before { opacity: 1; }
+        @property --angle {
+            syntax: '<angle>';
+            initial-value: 0deg;
+            inherits: false;
+        }
+        #publications .publication-card:hover { animation: spin-angle 3.2s linear infinite; }
+        @keyframes spin-angle { to { --angle: 360deg; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ticker-track { animation: none; }
+            #publications .publication-card:hover { animation: none; }
+            .hero-cursor-glow { display: none; }
+            .hero-ecg, .sensor-field { display: none; }
+            .nav-clock .clock-dot { animation: none; }
+        }
+
+        /* ================= CREATIVE LAYER v3 ================= */
+        /* Toast notification */
+        .toast-stack {
+            position: fixed;
+            left: 50%;
+            bottom: 1.5rem;
+            z-index: 95;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transform: translateX(-50%);
+            pointer-events: none;
+        }
+        .toast {
+            display: flex;
+            align-items: center;
+            gap: 0.65rem;
+            max-width: min(92vw, 26rem);
+            padding: 0.7rem 1.15rem;
+            border-radius: 999px;
+            background: var(--color-ink);
+            color: var(--color-gold-light);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            font-weight: 700;
+            box-shadow: 0 14px 34px rgba(65, 14, 18, 0.28);
+            opacity: 0;
+            transform: translateY(14px) scale(0.96);
+            transition: opacity 260ms ease, transform 260ms cubic-bezier(.2,.75,.25,1);
+            pointer-events: auto;
+            cursor: pointer;
+        }
+        .toast.is-visible { opacity: 1; transform: none; }
+        .toast .toast-icon { color: var(--color-gold); }
+
+        /* Palet perintah (Ctrl+K) */
+        .cmdk { position: fixed; inset: 0; z-index: 90; }
+        .cmdk[hidden] { display: none; }
+        .cmdk-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(46, 6, 9, 0.38);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
+            opacity: 0;
+            transition: opacity 220ms ease;
+        }
+        .cmdk.is-open .cmdk-backdrop { opacity: 1; }
+        .cmdk-panel {
+            position: relative;
+            margin: 12vh auto 0;
+            width: min(560px, calc(100vw - 2rem));
+            border-radius: 1.25rem;
+            overflow: hidden;
+            opacity: 0;
+            transform: translateY(12px) scale(0.98);
+            transition: opacity 240ms ease, transform 240ms cubic-bezier(.2,.75,.25,1);
+        }
+        .cmdk.is-open .cmdk-panel { opacity: 1; transform: none; }
+        .cmdk-input-row {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.9rem 1.1rem;
+            border-bottom: 1px solid rgba(123, 0, 5, 0.14);
+        }
+        .cmdk-input-row > i { color: var(--color-cyber); }
+        .cmdk-input-row input {
+            flex: 1;
+            min-width: 0;
+            background: transparent;
+            border: 0;
+            outline: none;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.85rem;
+            color: var(--color-ink);
+        }
+        .cmdk-input-row input::placeholder { color: rgba(99, 67, 74, 0.6); }
+        .cmdk-input-row kbd {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            padding: 0.2rem 0.4rem;
+            border-radius: 0.35rem;
+            border: 1px solid rgba(123, 0, 5, 0.2);
+            color: var(--color-muted);
+        }
+        .cmdk-list {
+            max-height: min(50vh, 22rem);
+            overflow-y: auto;
+            list-style: none;
+            margin: 0;
+            padding: 0.4rem;
+        }
+        .cmdk-group {
+            padding: 0.55rem 0.75rem 0.3rem;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--color-muted);
+        }
+        .cmdk-item {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.6rem 0.75rem;
+            border-radius: 0.7rem;
+            cursor: pointer;
+        }
+        .cmdk-item > i:first-child { width: 1.5rem; text-align: center; color: var(--color-cyber); }
+        .cmdk-item-label { flex: 1; min-width: 0; font-size: 0.82rem; font-weight: 600; color: var(--color-ink); }
+        .cmdk-item-hint { font-family: 'JetBrains Mono', monospace; font-size: 0.6rem; color: var(--color-muted); }
+        .cmdk-item.is-selected { background: rgba(123, 0, 5, 0.08); }
+        .cmdk-item.is-selected .cmdk-item-label { color: var(--color-cyber); }
+        .cmdk-empty {
+            padding: 1.4rem 1rem;
+            text-align: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.72rem;
+            color: var(--color-muted);
+        }
+        .cmdk-footer {
+            display: flex;
+            gap: 1.1rem;
+            padding: 0.6rem 1.1rem;
+            border-top: 1px solid rgba(123, 0, 5, 0.12);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            color: var(--color-muted);
+        }
+        #site-nav #cmdk-trigger {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 2.75rem;
+            height: 2.75rem;
+            flex: 0 0 2.75rem;
+            margin-left: auto;
+            margin-right: 0.5rem;
+            border-radius: 999px;
+            border: 1px solid rgba(123, 0, 5, 0.2);
+            background: rgba(255, 253, 248, 0.9);
+            color: var(--color-cyber);
+            transition: transform 180ms ease, background-color 180ms ease, color 180ms ease;
+        }
+        #site-nav #cmdk-trigger:hover {
+            background: var(--color-cyber);
+            color: #f5e8d2;
+            transform: translateY(-1px);
+        }
+
+        /* Sensor field (partikel IoT interaktif) */
+        .sensor-field {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* Denyut ECG tepi bawah hero */
+        .hero-ecg {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 16;
+            width: 100%;
+            height: 56px;
+            pointer-events: none;
+            opacity: 1;
+        }
+
+        /* Jam sistem live — indikator tipis di taskbar (nav), tampil >=1024px */
+        .nav-clock {
+            display: none;
+            align-items: center;
+            gap: 0.4rem;
+            margin-right: 0.35rem;
+            color: rgba(123, 0, 5, 0.78);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.6rem;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            white-space: nowrap;
+            user-select: none;
+        }
+        .nav-clock .clock-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--color-cyber);
+            animation: clock-blink 1.6s ease-in-out infinite;
+        }
+        @media (min-width: 1024px) {
+            /* Di layar lebar: jam ikut terdorong ke kanan taskbar, menempel di kiri tombol aksi */
+            .nav-clock { display: inline-flex; margin-left: auto; }
+            #site-nav #cmdk-trigger { margin-left: 0; }
+        }
+        @keyframes clock-blink { 0%, 100% { opacity: 1; } 50% { opacity: 0.25; } }
+
+        /* Divider: fokus keyboard + journey progress bergaris */
+        #split-divider:focus-visible {
+            outline: 3px solid rgba(123, 0, 5, 0.72);
+            outline-offset: 4px;
+            border-radius: 4px;
+        }
+        #journey-progress {
+            position: relative;
+            background-color: #d4b48b;
+            background-image: linear-gradient(90deg, rgba(255, 255, 255, 0.32) 25%, transparent 25% 50%, rgba(255, 255, 255, 0.32) 50% 75%, transparent 75%);
+            background-size: 12px 100%;
+            animation: journey-stripes 1.1s linear infinite;
+        }
+        @keyframes journey-stripes { to { background-position: 12px 0; } }
+        #journey-progress::after {
+            content: "";
+            position: absolute;
+            right: -4px;
+            top: 50%;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: var(--color-cyber);
+            box-shadow: 0 0 10px rgba(123, 0, 5, 0.5);
+            transform: translateY(-50%);
+        }
+
+        /* Party mode (easter egg) */
+        body.party .ticker-track { animation-duration: 6s; }
+        body.party .hero-cursor-glow {
+            background: radial-gradient(540px circle at var(--glow-x, 50%) var(--glow-y, 42%), rgba(212, 180, 139, 0.24), transparent 62%);
+        }
+        body.party #timeline-section .timeline-item > div:first-child { animation-duration: 0.8s; }
+        body.party .nav-clock .clock-dot { animation-duration: 0.45s; }
+        body.party .toast { background: #d4b48b; color: #5c0a10; box-shadow: 0 16px 38px rgba(212, 180, 139, 0.4); }
+        body.party .cmdk-item.is-selected { background: rgba(212, 180, 139, 0.28); }
+
+        /* ===== P0: CV sheet (tampilan layar) ===== */
+        .cv-sheet {
+            overflow: hidden;
+            background: #fffdf7;
+            border: 1px solid rgba(123, 0, 5, 0.22);
+            border-radius: 1.25rem;
+            box-shadow: 0 30px 70px rgba(65, 14, 18, 0.16);
+        }
+        .cv-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: flex-end;
+            justify-content: space-between;
+            gap: 0.75rem 1.5rem;
+            padding: 1.6rem 1.9rem 1.45rem;
+            background: linear-gradient(128deg, #7b0005 0%, #5a0005 78%);
+            color: #f7f3ea;
+        }
+        .cv-name {
+            color: #fdf8ee;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: clamp(1.45rem, 3.2vw, 1.9rem);
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            line-height: 1.1;
+        }
+        .cv-role {
+            margin-top: 0.3rem;
+            color: rgba(253, 248, 238, 0.85);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.66rem;
+            line-height: 1.55;
+        }
+        .cv-head-meta {
+            display: grid;
+            gap: 0.18rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            text-align: right;
+            color: rgba(253, 248, 238, 0.88);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.64rem;
+            line-height: 1.5;
+        }
+        .cv-body {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.6rem;
+            padding: 1.7rem 1.9rem 1.9rem;
+        }
+        @media (min-width: 900px) {
+            .cv-body { grid-template-columns: 1.7fr 1fr; gap: 2.2rem; }
+        }
+        .cv-block + .cv-block { margin-top: 1.3rem; }
+        .cv-block-title {
+            margin-bottom: 0.7rem;
+            padding-bottom: 0.35rem;
+            border-bottom: 1px solid rgba(123, 0, 5, 0.28);
+            color: #7b0005;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+            font-weight: 700;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+        }
+        .cv-text {
+            color: #4a3234;
+            font-size: 0.76rem;
+            line-height: 1.65;
+        }
+        .cv-entry + .cv-entry { margin-top: 0.75rem; }
+        .cv-entry-head {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: baseline;
+            justify-content: space-between;
+            gap: 0.2rem 0.75rem;
+        }
+        .cv-entry-head strong {
+            color: #2b0d10;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 0.84rem;
+            font-weight: 700;
+        }
+        .cv-entry-date {
+            color: #7b0005;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.64rem;
+            font-weight: 700;
+        }
+        .cv-entry-role {
+            margin-top: 0.1rem;
+            color: #7b0005;
+            font-size: 0.74rem;
+            font-weight: 600;
+        }
+        .cv-entry-desc {
+            margin-top: 0.15rem;
+            color: #5e4447;
+            font-size: 0.7rem;
+            line-height: 1.55;
+        }
+        .cv-skill-group + .cv-skill-group { margin-top: 0.6rem; }
+        .cv-skill-label {
+            color: #2b0d10;
+            font-size: 0.74rem;
+            font-weight: 700;
+        }
+        .cv-contact-list {
+            display: grid;
+            gap: 0.3rem;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+        .cv-contact-list li {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #4a3234;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.68rem;
+        }
+        .cv-contact-list li i {
+            width: 0.9rem;
+            color: #7b0005;
+            font-size: 0.7rem;
+            text-align: center;
+        }
+        .cv-cite {
+            color: #4a3234;
+            font-size: 0.72rem;
+            line-height: 1.6;
+        }
+        .cv-cite em { color: #2b0d10; font-style: italic; }
+
+        /* ===== P0: CV saat dicetak / disimpan sebagai PDF ===== */
+        @media print {
+            html, body { height: auto !important; overflow: visible !important; }
+            body { background: #ffffff !important; overflow: visible !important; }
+            body > *:not(#cv) { display: none !important; }
+            /* SPA screen memakai position:fixed + overflow auto -> harus
+               dinormalkan ke static saat print agar seluruh isi CV tercetak
+               dan berpindah halaman dengan benar. */
+            #cv,
+            body > section.spa-screen#cv {
+                display: block !important;
+                position: static !important;
+                inset: auto !important;
+                top: auto !important;
+                right: auto !important;
+                bottom: auto !important;
+                left: auto !important;
+                height: auto !important;
+                min-height: 0 !important;
+                max-height: none !important;
+                overflow: visible !important;
+                padding: 0 !important;
+                border: 0 !important;
+                background: #ffffff !important;
+            }
+            #cv .cv-no-print { display: none !important; }
+            .cv-sheet {
+                overflow: visible !important;
+                border: none !important;
+                border-radius: 0 !important;
+                box-shadow: none !important;
+            }
+            .cv-head {
+                padding: 0 0 0.8rem !important;
+                border-bottom: 2px solid #7b0005;
+                background: #ffffff !important;
+            }
+            .cv-name, .cv-role, .cv-head-meta, .cv-head-meta li { color: #7b0005 !important; }
+            .cv-body { padding: 1.1rem 0 0 !important; }
+            .cv-entry, .cv-head, .cv-block-title { break-inside: avoid; }
+        }
+        @page { size: A4; margin: 13mm 14mm; }
     </style>
 </head>
 <body class="antialiased selection:bg-cyber selection:text-black">
@@ -1919,9 +2512,33 @@
         <span class="custom-cursor-dot"></span>
     </div>
 
+    <!-- Tekstur grain untuk kesan editorial modern -->
+    <div class="grain-overlay" aria-hidden="true"></div>
+
+    <!-- Toast notifications -->
+    <div id="toast-stack" class="toast-stack" aria-live="polite" aria-atomic="false"></div>
+
+    <!-- Palet perintah cepat (Ctrl + K) -->
+    <div id="cmdk" class="cmdk" role="dialog" aria-modal="true" aria-label="Palet perintah cepat" hidden>
+        <div class="cmdk-backdrop" data-cmd-close></div>
+        <div class="cmdk-panel glass-panel">
+            <div class="cmdk-input-row">
+                <i class="fas fa-search" aria-hidden="true"></i>
+                <input id="cmdk-input" type="text" placeholder="Cari section atau aksi… (cth: iot, publikasi, email)" autocomplete="off" spellcheck="false" role="combobox" aria-expanded="true" aria-controls="cmdk-list" aria-label="Cari perintah" aria-autocomplete="list">
+                <kbd aria-hidden="true">ESC</kbd>
+            </div>
+            <ul id="cmdk-list" class="cmdk-list" role="listbox" aria-label="Hasil pencarian"></ul>
+            <div class="cmdk-footer" aria-hidden="true">
+                <span>&#8593;&#8595; navigasi</span>
+                <span>&#8629; pilih</span>
+                <span>Ctrl+K tutup</span>
+            </div>
+        </div>
+    </div>
+
     <div id="site-loader" role="status" aria-live="polite" aria-label="Memuat website">
         <div class="loader-panel">
-            <h1 class="loader-title">about.dafanda</h1>
+            <h1 class="loader-title">dafaverse</h1>
             <div class="loader-status-row"><span>INITIALIZING EXPERIENCE<span aria-hidden="true">...</span></span><span id="loader-percent" class="loader-percent">0%</span></div>
             <div class="loader-track" aria-hidden="true"><span class="loader-progress"></span></div>
         </div>
@@ -1936,7 +2553,7 @@
                 <span class="relative flex h-2.5 w-2.5">
                   <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyber"></span>
                 </span>
-                <span class="text-white hover:text-cyber transition-colors tracking-tight font-extrabold">Ahmad Dafanda Abdullah</span>
+                <span class="text-white hover:text-cyber transition-colors tracking-tight font-extrabold">Dafaverse</span>
             </a>
 
             <!-- Nav Links -->
@@ -1944,8 +2561,11 @@
                 <a href="#hero-split-container" class="nav-link hover:text-cyber transition-all">Beranda</a>
                 <a href="#cli-terminal" class="nav-link hover:text-cyber transition-all">Terminal</a>
                 <a href="#iot-spirometry" class="nav-link hover:text-neonGreen transition-all">Proyek IoT</a>
+                <a href="#publications" class="nav-link hover:text-gold transition-all">Publikasi</a>
                 <a href="#timeline-section" class="nav-link hover:text-gold transition-all">Pengalaman</a>
                 <a href="#journey-navigator" class="nav-link hover:text-gold transition-all">Perjalanan</a>
+                <a href="#skills-section" class="nav-link hover:text-cyber transition-all">Keahlian</a>
+                <a href="#cv" class="nav-link hover:text-cyber transition-all">CV</a>
                 <a href="#contact" class="nav-link hover:text-waGreen transition-all">Kontak</a>
             </div>
 
@@ -1957,6 +2577,17 @@
                 <div class="spa-progress-track" aria-hidden="true"><span id="spa-progress-bar" class="spa-progress-bar"></span></div>
             </div>
 
+            <!-- Indikator jam sistem live (WIB) di taskbar -->
+            <div class="nav-clock" aria-hidden="true">
+                <span class="clock-dot"></span>
+                <span>SYS</span>
+                <span id="hero-clock-text">--:--:--</span>
+                <span>WIB</span>
+            </div>
+
+            <button id="cmdk-trigger" type="button" aria-label="Buka palet perintah cepat (Ctrl+K)">
+                <i class="fas fa-search" aria-hidden="true"></i>
+            </button>
             <button id="menu-toggle" type="button" aria-label="Buka semua opsi halaman" aria-expanded="false" aria-controls="mobile-menu">
                 <i class="fas fa-bars" aria-hidden="true"></i>
             </button>
@@ -1970,18 +2601,25 @@
             <a class="mobile-nav-link" href="#timeline-section">Pengalaman</a>
             <a class="mobile-nav-link" href="#journey-navigator">Perjalanan</a>
             <a class="mobile-nav-link" href="#skills-section">Keahlian</a>
+            <a class="mobile-nav-link" href="#cv">CV</a>
             <a class="mobile-nav-link" href="#contact">Kontak</a>
         </div>
     </nav>
 
     <!-- HERO SECTION: ADHAM DANNAWAY SPLIT-SCREEN -->
     <section id="hero-split-container" class="pt-16">
-        
-<!-- RIGHT PANEL: Leadership & Non-Academic (Stage Gold) -->
+
+        <!-- Cahaya halo mengikuti posisi kursor -->
+        <div class="hero-cursor-glow" aria-hidden="true"></div>
+
+        <!-- Denyut ECG IoT di tepi bawah hero -->
+        <canvas id="hero-ecg" class="hero-ecg" aria-hidden="true"></canvas>
+
+        <!-- RIGHT PANEL: Leadership & Non-Academic (Stage Gold) -->
         <div class="hero-panel panel-leadership stage-spotlight-bg">
     <div class="hero-logo-pair hero-logo-pair-leadership" role="group" aria-label="Logo organisasi kepemimpinan">
-        <span class="hero-logo-tile"><img src="Foto/Logo%20SEMA.png" alt="Logo Senat Mahasiswa"></span>
-        <span class="hero-logo-tile"><img src="Foto/Logo%20HMPSTI.png" alt="Logo HMPSTI"></span>
+        <span class="hero-logo-tile"><img loading="lazy" src="Foto/Logo%20SEMA.png" alt="Logo Senat Mahasiswa"></span>
+        <span class="hero-logo-tile"><img loading="lazy" src="Foto/Logo%20HMPSTI.png" alt="Logo HMPSTI"></span>
     </div>
     <div class="max-w-[1400px] mx-auto w-full h-full flex items-center justify-end px-6 sm:px-12 md:px-16 relative">
                 <div class="hero-copy-flow w-full md:w-[380px] lg:w-[420px] z-20 text-right space-y-4">
@@ -2018,9 +2656,11 @@
 
         <!-- LEFT PANEL: Tech & Academic (Cyber Cyan) -->
         <div class="hero-panel panel-tech cyber-grid-bg">
+            <!-- Kanvas partikel "sensor field" -->
+            <canvas id="sensor-field" class="sensor-field" aria-hidden="true"></canvas>
             <div class="hero-logo-pair hero-logo-pair-tech" role="group" aria-label="Logo institusi akademik">
-                <span class="hero-logo-tile"><img src="Foto/Logo%20Amikom.png" alt="Logo Universitas Amikom Purwokerto"></span>
-                <span class="hero-logo-tile"><img src="Foto/Logo%20Prodi%20TI.png" alt="Logo Program Studi Teknologi Informasi"></span>
+                <span class="hero-logo-tile"><img loading="lazy" src="Foto/Logo%20Amikom.png" alt="Logo Universitas Amikom Purwokerto"></span>
+                <span class="hero-logo-tile"><img loading="lazy" src="Foto/Logo%20Prodi%20TI.png" alt="Logo Program Studi Teknologi Informasi"></span>
             </div>
             <div class="max-w-[1400px] mx-auto w-full h-full flex items-center justify-start px-6 sm:px-12 md:px-16 relative">
                 <div class="hero-copy-flow w-full md:w-[380px] lg:w-[420px] z-20 text-left space-y-4">
@@ -2077,12 +2717,12 @@
                 <text x="250" y="650" font-family="JetBrains Mono" font-size="12" fill="#004741" text-anchor="middle" opacity="0.8">&lt; AHMAD DAFANDA ABDULLAH /&gt;</text>
                 <text x="250" y="670" font-family="Space Grotesk" font-size="10" fill="#8FC8BA" text-anchor="middle" letter-spacing="2">AMIKOM PURWOKERTO • SENAT MAHASISWA</text>
             </svg>
-            <img id="stage-photo-img" src="Foto/Foto%20Ke1.png" class="stage-photo-img" alt="Ahmad Dafanda">
+            <img id="stage-photo-img" src="Foto/Foto%20Ke1.png" class="stage-photo-img" alt="Ahmad Dafanda" width="1803" height="2165">
         </div>
 
         <!-- DRAGGABLE INTERACTIVE SLIDER DIVIDER BAR -->
         <div class="split-divider-visual" aria-hidden="true"></div>
-        <div class="split-divider-line" id="split-divider" aria-label="Geser untuk menyesuaikan rasio"></div>
+        <div class="split-divider-line" id="split-divider" tabindex="0" role="separator" aria-orientation="vertical" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-label="Geser untuk menyesuaikan rasio"></div>
 
         <!-- PERCENTAGE STATUS BAR & QUICK PRESETS -->
         <div class="absolute bottom-6 left-1/2 -translate-x-1/2 z-30 flex flex-wrap items-center justify-center gap-3 bg-dark/90 px-5 py-2.5 rounded-full border border-white/15 backdrop-blur-md shadow-2xl font-mono text-xs">
@@ -2108,6 +2748,52 @@
     <!-- DEVELOPER CLI TERMINAL -->
     <section id="cli-terminal" class="py-20 bg-darker relative border-t border-white/10">
         <div class="max-w-5xl mx-auto px-4">
+
+            <!-- Ticker band: keahlian berjalan infinit -->
+            <div class="ticker-band glass-panel rounded-2xl mb-5 py-3" role="presentation" aria-hidden="true">
+                <div class="ticker-track">
+                    <div class="ticker-group">
+                        <span class="ticker-item">Web Development</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">IoT Engineering</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Smart Spirometry</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">MQTT Telemetry</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Publikasi Jurnal</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Legislative Leadership</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Event Management</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Public Relations</span><span class="ticker-dot">&#9670;</span>
+                    </div>
+                    <div class="ticker-group">
+                        <span class="ticker-item">Web Development</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">IoT Engineering</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Smart Spirometry</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">MQTT Telemetry</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Publikasi Jurnal</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Legislative Leadership</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Event Management</span><span class="ticker-dot">&#9670;</span>
+                        <span class="ticker-item">Public Relations</span><span class="ticker-dot">&#9670;</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Statistik pencapaian dengan hitungan animasi -->
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-6 font-mono">
+                <div class="stat-tile glass-panel rounded-2xl p-4 text-center">
+                    <div class="stat-num">2</div>
+                    <div class="stat-label">Publikasi Jurnal</div>
+                </div>
+                <div class="stat-tile glass-panel rounded-2xl p-4 text-center">
+                    <div class="stat-num">9+</div>
+                    <div class="stat-label">Pengalaman Organisasi</div>
+                </div>
+                <div class="stat-tile glass-panel rounded-2xl p-4 text-center">
+                    <div class="stat-num">1</div>
+                    <div class="stat-label">Inovasi IoT Medis</div>
+                </div>
+                <div class="stat-tile glass-panel rounded-2xl p-4 text-center">
+                    <div class="stat-num">2026</div>
+                    <div class="stat-label">Ketua Umum SEMA</div>
+                </div>
+            </div>
             
             <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4">
                 <div>
@@ -2413,81 +3099,6 @@
                 </div>
             </div>
 
-            <!-- Timeline Container -->
-            <div class="hidden" aria-hidden="true">
-                
-                <!-- Timeline Item 1 -->
-                <div class="timeline-item relative group" data-category="leadership">
-                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-gold border-4 border-dark group-hover:scale-125 transition-transform shadow-[0_0_15px_rgba(0,71,65,0.24)]"></div>
-                    <div class="timeline-year hidden sm:block absolute -left-32 top-1 font-mono text-xs text-gold font-bold">2026</div>
-                    
-                    <div class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-gold/50 transition-all space-y-3">
-                        <div class="flex flex-wrap justify-between items-center gap-2">
-                            <span class="text-xs font-mono text-gold font-bold uppercase sm:hidden">2026</span>
-                            <span class="px-2.5 py-0.5 rounded bg-gold/20 text-gold font-mono text-[11px] font-bold border border-gold/30">Puncak Kepemimpinan</span>
-                        </div>
-                        <h3 class="font-display text-xl font-bold text-white">Ketua Umum — Senat Mahasiswa</h3>
-                        <p class="text-gray-300 text-xs leading-relaxed">
-                            Memimpin lembaga legislatif tinggi mahasiswa tingkat universitas dalam pengawasan, pemikiran kebijakan strategis, dan penyaluran aspirasi publik.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Timeline Item 2 -->
-                <div class="timeline-item relative group" data-category="leadership">
-                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-gold border-4 border-dark group-hover:scale-125 transition-transform"></div>
-                    <div class="timeline-year hidden sm:block absolute -left-32 top-1 font-mono text-xs text-gold font-bold">2026</div>
-                    
-                    <div class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-gold/50 transition-all space-y-3">
-                        <h3 class="font-display text-xl font-bold text-white">Chief Field Coordinator — TECH4FEST</h3>
-                        <p class="text-gray-300 text-xs leading-relaxed">
-                            Mengkoordinasikan seluruh lapangan, teknis operasional, dan manajerial tim dalam festival teknologi tahunan berskala nasional.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Timeline Item 3 -->
-                <div class="timeline-item relative group" data-category="leadership">
-                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-gold border-4 border-dark group-hover:scale-125 transition-transform"></div>
-                    <div class="timeline-year hidden sm:block absolute -left-32 top-1 font-mono text-xs text-gold font-bold">2025</div>
-                    
-                    <div class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-gold/50 transition-all space-y-3">
-                        <h3 class="font-display text-xl font-bold text-white">Ketua Pelaksana — FIK Got Talent</h3>
-                        <p class="text-gray-300 text-xs leading-relaxed">
-                            Penanggung jawab utama pencarian bakat Fakultas Ilmu Komputer. Mengelola tim panitia, penganggaran, dan konsep panggung utama.
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Timeline Item 4 -->
-                <div class="timeline-item relative group" data-category="tech">
-                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-cyber border-4 border-dark group-hover:scale-125 transition-transform shadow-[0_0_15px_rgba(0,71,65,0.24)]"></div>
-                    <div class="hidden sm:block absolute -left-32 top-1 font-mono text-xs text-cyber font-bold">2024 - 2025</div>
-                    
-                    <div class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-cyber/50 transition-all space-y-3">
-                        <span class="px-2.5 py-0.5 rounded bg-cyber/20 text-cyber font-mono text-[11px] font-bold border border-cyber/30">Public Relations Lead</span>
-                        <h3 class="font-display text-xl font-bold text-white">HMPS Teknologi Informasi</h3>
-                        <p class="text-gray-300 text-xs leading-relaxed">
-                            Kepala Departemen PR. Memimpin tim dalam proyek **Serutek** (Penanggung Jawab), **Technofest** (Koordinator Humas), dan **Connextion** (Penanggung Jawab).
-                        </p>
-                    </div>
-                </div>
-
-                <!-- Timeline Item 5 -->
-                <div class="timeline-item relative group" data-category="tech">
-                    <div class="absolute -left-[31px] sm:-left-[47px] top-1.5 w-5 h-5 rounded-full bg-cyber border-4 border-dark group-hover:scale-125 transition-transform"></div>
-                    <div class="hidden sm:block absolute -left-32 top-1 font-mono text-xs text-cyber font-bold">2024 - Now</div>
-                    
-                    <div class="glass-panel rounded-2xl p-6 border border-white/10 hover:border-cyber/50 transition-all space-y-3">
-                        <h3 class="font-display text-xl font-bold text-white">Universitas Amikom Purwokerto</h3>
-                        <p class="text-gray-300 text-xs leading-relaxed">
-                            Mahasiswa S1 Teknologi Informasi. Fokus pada rekayasa perangkat lunak, sistem IoT medis, dan keterlibatan aktif dalam kepanitiaan.
-                        </p>
-                    </div>
-                </div>
-
-            </div>
-
             <div class="timeline-rail relative ml-4 sm:ml-32 pl-6 sm:pl-10 space-y-12">
                 <div class="timeline-item relative group" data-category="leadership">
                     <div class="absolute -left-[26px] sm:-left-[42px] top-1.5 w-5 h-5 rounded-full bg-gold border-4 border-dark group-hover:scale-125 transition-transform shadow-[0_0_15px_rgba(0,71,65,0.24)]"></div>
@@ -2496,7 +3107,7 @@
                         <span class="text-xs font-mono text-gold font-bold uppercase sm:hidden">2026</span>
                         <h3 class="font-display text-xl font-bold text-white">Senat Mahasiswa</h3>
                         <p class="text-gray-300 text-xs leading-relaxed">Ketua Umum</p>
-                        <img class="timeline-card-logo" src="Foto/Logo%20SEMA.png" alt="Logo Senat Mahasiswa">
+                        <img class="timeline-card-logo" loading="lazy" src="Foto/Logo%20SEMA.png" alt="Logo Senat Mahasiswa">
                     </a>
                 </div>
 
@@ -2507,7 +3118,7 @@
                         <span class="text-xs font-mono text-gold font-bold uppercase sm:hidden">2026</span>
                         <h3 class="font-display text-xl font-bold text-white">TECH4FEST</h3>
                         <p class="text-gray-300 text-xs leading-relaxed">Chief Field Coordinator</p>
-                        <img class="timeline-card-logo" src="Foto/Logo%20TNF.png" alt="Logo TECH4FEST">
+                        <img class="timeline-card-logo" loading="lazy" src="Foto/Logo%20TNF.png" alt="Logo TECH4FEST">
                     </a>
                 </div>
 
@@ -2518,7 +3129,7 @@
                         <span class="text-xs font-mono text-gold font-bold uppercase sm:hidden">2025</span>
                         <h3 class="font-display text-xl font-bold text-white">Expo Kampus Berdampak FIK</h3>
                         <p class="text-gray-300 text-xs leading-relaxed">Wakil Ketua Expo</p>
-                        <img class="timeline-card-logo" src="Foto/Logo%20FIK.png" alt="Logo FIK">
+                        <img class="timeline-card-logo" loading="lazy" src="Foto/Logo%20FIK.png" alt="Logo FIK">
                     </a>
                 </div>
 
@@ -2529,7 +3140,7 @@
                         <span class="text-xs font-mono text-gold font-bold uppercase sm:hidden">2025</span>
                         <h3 class="font-display text-xl font-bold text-white">Pemira</h3>
                         <p class="text-gray-300 text-xs leading-relaxed">Sekretaris Panitia Pengawas</p>
-                        <img class="timeline-card-logo" src="Foto/Logo%20Pemira.png" alt="Logo Pemira">
+                        <img class="timeline-card-logo" loading="lazy" src="Foto/Logo%20Pemira.png" alt="Logo Pemira">
                     </a>
                 </div>
 
@@ -2540,7 +3151,7 @@
                         <span class="text-xs font-mono text-gold font-bold uppercase sm:hidden">2025</span>
                         <h3 class="font-display text-xl font-bold text-white">FIK Got Talent</h3>
                         <p class="text-gray-300 text-xs leading-relaxed">Ketua Pelaksana</p>
-                        <img class="timeline-card-logo" src="Foto/Logo%20FGT.png" alt="Logo FIK Got Talent">
+                        <img class="timeline-card-logo" loading="lazy" src="Foto/Logo%20FGT.png" alt="Logo FIK Got Talent">
                     </a>
                 </div>
 
@@ -2551,7 +3162,7 @@
                         <span class="text-xs font-mono text-gold font-bold uppercase sm:hidden">2025</span>
                         <h3 class="font-display text-xl font-bold text-white">Senat Mahasiswa</h3>
                         <p class="text-gray-300 text-xs leading-relaxed">Legislatif Muda</p>
-                        <img class="timeline-card-logo" src="Foto/Logo%20SEMA.png" alt="Logo Senat Mahasiswa">
+                        <img class="timeline-card-logo" loading="lazy" src="Foto/Logo%20SEMA.png" alt="Logo Senat Mahasiswa">
                     </a>
                 </div>
 
@@ -2567,7 +3178,7 @@
                             <li>Kepanitiaan Technofest | Koordinator Humas</li>
                             <li>Kepanitiaan Connextion | Penanggung Jawab</li>
                         </ul>
-                        <img class="timeline-card-logo" src="Foto/Logo%20HMPSTI.png" alt="Logo HMPSTI">
+                        <img class="timeline-card-logo" loading="lazy" src="Foto/Logo%20HMPSTI.png" alt="Logo HMPSTI">
                     </a>
                 </div>
             </div>
@@ -2614,7 +3225,7 @@
 
                 <div class="journey-detail glass-panel group relative overflow-hidden rounded-2xl border border-white/10 p-6 sm:p-8 flex flex-col justify-between min-h-[290px] lg:min-h-[477px]">
                     <div class="absolute -right-16 -bottom-24 w-80 h-80 rounded-full bg-gold/15 blur-3xl pointer-events-none"></div>
-                    <img src="Foto/Foto%20Ke2.png" alt="Ahmad Dafanda mengenakan batik" class="hidden sm:block absolute right-0 bottom-0 h-[96%] max-w-[44%] object-contain object-bottom opacity-90 drop-shadow-[0_0_25px_rgba(0,71,65,0.18)] transition-transform duration-500 group-hover:scale-105 group-hover:-translate-x-2">
+                    <img src="Foto/Foto%20Ke2.png" alt="Ahmad Dafanda mengenakan batik" class="hidden sm:block absolute right-0 bottom-0 h-[96%] max-w-[44%] object-contain object-bottom opacity-90 drop-shadow-[0_0_25px_rgba(0,71,65,0.18)] transition-transform duration-500 group-hover:scale-105 group-hover:-translate-x-2" loading="lazy" width="1294" height="1959">
                     <div class="relative z-10 max-w-full sm:max-w-[60%]">
                         <div class="flex items-center justify-between gap-3 mb-5">
                             <span id="journey-year" class="px-3 py-1 rounded-full bg-gold/15 text-gold border border-gold/30 text-xs font-mono font-bold">2025&ndash;2026</span>
@@ -2693,6 +3304,196 @@
         </div>
     </section>
 
+    <!-- CV / RESUME SECTION -->
+    <section id="cv" class="py-20 bg-darker border-t border-white/10">
+        <div class="max-w-5xl mx-auto px-4">
+
+            <div class="flex flex-col sm:flex-row justify-between items-start sm:items-end mb-8 gap-4 cv-no-print">
+                <div>
+                    <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-gold/10 text-gold font-mono text-xs font-semibold border border-gold/30 mb-2">
+                        <i class="fas fa-file-lines"></i> Curriculum Vitae
+                    </div>
+                    <h2 class="font-display text-3xl sm:text-4xl font-bold text-white">CV &amp; Ringkasan Profesional</h2>
+                </div>
+                <button type="button" onclick="downloadCV()" class="shrink-0 inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-cyber text-black font-bold text-xs sm:text-sm hover:bg-cyberDark transition-all">
+                    <i class="fas fa-download"></i> Unduh CV (PDF)
+                </button>
+            </div>
+
+            <article class="cv-sheet">
+                <header class="cv-head">
+                    <div class="cv-head-main">
+                        <h3 class="cv-name">Ahmad Dafanda Abdullah</h3>
+                        <p class="cv-role">Mahasiswa S1 Teknologi Informasi · Web Developer &amp; IoT Engineer · Ketua Umum Senat Mahasiswa 2026</p>
+                    </div>
+                    <ul class="cv-head-meta">
+                        <li>Purbalingga, Jawa Tengah</li>
+                        <li>adnafaddamha@gmail.com</li>
+                        <li>+62 895-4211-69504</li>
+                        <li>github.com/Ahmaddaff</li>
+                    </ul>
+                </header>
+
+                <div class="cv-body">
+                    <div class="cv-main">
+
+                        <section class="cv-block">
+                            <h4 class="cv-block-title">Profil</h4>
+                            <p class="cv-text">
+                                Mahasiswa S1 Teknologi Informasi Universitas Amikom Purwokerto dengan fokus pada pengembangan web modern dan IoT. Berpengalaman memimpin organisasi kemahasiswaan — menjabat sebagai Ketua Umum Senat Mahasiswa 2026 — serta mengelola humas dan kepanitiaan berbagai akademik event. Aktif meneliti dan membangun sistem berbasis data, dengan dua publikasi jurnal ilmiah dan proyek IoT medis berbiaya terjangkau (Smart Spirometry).
+                            </p>
+                        </section>
+
+                        <section class="cv-block">
+                            <h4 class="cv-block-title">Pendidikan</h4>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>S1 Teknologi Informasi</strong>
+                                    <span class="cv-entry-date">Universitas Amikom Purwokerto</span>
+                                </div>
+                                <p class="cv-entry-role">Mahasiswa aktif — fokus pengembangan web modern &amp; IoT</p>
+                            </div>
+                        </section>
+
+                        <section class="cv-block">
+                            <h4 class="cv-block-title">Pengalaman &amp; Organisasi</h4>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>Senat Mahasiswa Universitas Amikom Purwokerto</strong>
+                                    <span class="cv-entry-date">2026</span>
+                                </div>
+                                <p class="cv-entry-role">Ketua Umum</p>
+                            </div>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>TECH4FEST 2026</strong>
+                                    <span class="cv-entry-date">2026</span>
+                                </div>
+                                <p class="cv-entry-role">Chief Field Coordinator</p>
+                            </div>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>Expo Kampus Berdampak FIK</strong>
+                                    <span class="cv-entry-date">2025</span>
+                                </div>
+                                <p class="cv-entry-role">Wakil Ketua Expo</p>
+                            </div>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>Pemira Universitas Amikom Purwokerto</strong>
+                                    <span class="cv-entry-date">2025</span>
+                                </div>
+                                <p class="cv-entry-role">Sekretaris Panitia Pengawas</p>
+                            </div>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>FIK Got Talent</strong>
+                                    <span class="cv-entry-date">2025</span>
+                                </div>
+                                <p class="cv-entry-role">Ketua Pelaksana</p>
+                            </div>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>Senat Mahasiswa</strong>
+                                    <span class="cv-entry-date">2025</span>
+                                </div>
+                                <p class="cv-entry-role">Legislatif Muda</p>
+                            </div>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>HMPS Teknologi Informasi</strong>
+                                    <span class="cv-entry-date">2024&ndash;2025</span>
+                                </div>
+                                <p class="cv-entry-role">Kepala Departemen Public Relation</p>
+                                <p class="cv-entry-desc">Kepanitiaan Serutek (PJ) · Technofest (Koordinator Humas) · Connextion (PJ)</p>
+                            </div>
+                        </section>
+
+                        <section class="cv-block">
+                            <h4 class="cv-block-title">Publikasi Ilmiah</h4>
+                            <div class="cv-entry">
+                                <p class="cv-cite">
+                                    Abdullah, A. D., et al. (2025). Peningkatan Literasi IoT Melalui Simulasi Wokwi Bagi Siswa SMP Muhammadiyah 1 Purwokerto. <em>Aksi Kolektif: Jurnal Pengabdian</em>, 2(1), 51&ndash;57.
+                                </p>
+                            </div>
+                            <div class="cv-entry">
+                                <p class="cv-cite">
+                                    Abdullah, A. D., et al. (2026). Sistem Pelaporan Kerusakan Fasilitas Kampus Berbasis Identitas Terverifikasi dan Agregasi Data untuk Prioritas Perbaikan. <em>Indonesian Journal of Multidisciplinary Scientific Studies</em>, 4(4). DOI: 10.33151/ijomss.v4i4.959.
+                                </p>
+                            </div>
+                        </section>
+
+                        <section class="cv-block">
+                            <h4 class="cv-block-title">Proyek</h4>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>Smart Spirometry Web</strong>
+                                    <span class="cv-entry-date">2025</span>
+                                </div>
+                                <p class="cv-entry-role">IoT Engineer &amp; Web Developer</p>
+                                <p class="cv-entry-desc">Perangkat spirometri berbasis mikrokontroler &amp; waterflow sensor dengan dashboard web telemetri real-time (MQTT/WebSockets). Live: ungu.in/smartspirometry</p>
+                            </div>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>Sistem Pelaporan Kerusakan Fasilitas Kampus</strong>
+                                    <span class="cv-entry-date">2026</span>
+                                </div>
+                                <p class="cv-entry-role">Peneliti &amp; Pengembang (co-author)</p>
+                                <p class="cv-entry-desc">Web app dengan identitas terverifikasi dan dashboard agregat tren per lokasi untuk prioritas perbaikan — dipublikasikan di IJOMSS 4(4).</p>
+                            </div>
+                            <div class="cv-entry">
+                                <div class="cv-entry-head">
+                                    <strong>Website Personal Branding</strong>
+                                    <span class="cv-entry-date">2026</span>
+                                </div>
+                                <p class="cv-entry-role">Desainer &amp; Pengembang</p>
+                                <p class="cv-entry-desc">Situs personal branding interaktif dengan terminal CLI dan visualisasi telemetri IoT. Live: aboutdafanda.vercel.app</p>
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <aside class="cv-side">
+
+                        <section class="cv-block">
+                            <h4 class="cv-block-title">Keahlian</h4>
+                            <div class="cv-skill-group">
+                                <p class="cv-skill-label">Leadership &amp; Management</p>
+                                <p class="cv-text">Legislative Leadership · Event Director &amp; Public Speaking · Strategic Problem Solving · Team Collaboration</p>
+                            </div>
+                            <div class="cv-skill-group">
+                                <p class="cv-skill-label">Tech &amp; Engineering</p>
+                                <p class="cv-text">Waterflow Sensor &amp; Mikrokontroler · Full-Stack Web Development · MQTT &amp; Telemetry Architecture · System &amp; API Design</p>
+                            </div>
+                            <div class="cv-skill-group">
+                                <p class="cv-skill-label">Communication</p>
+                                <p class="cv-text">Public Relations &amp; Media · Public Speaking · Kolaborasi Tim</p>
+                            </div>
+                        </section>
+
+                        <section class="cv-block">
+                            <h4 class="cv-block-title">Bahasa</h4>
+                            <p class="cv-text"><strong>Bahasa Indonesia</strong> — Native<br><strong>English</strong> — Professional / Working Proficiency</p>
+                        </section>
+
+                        <section class="cv-block">
+                            <h4 class="cv-block-title">Kontak</h4>
+                            <ul class="cv-contact-list">
+                                <li><i class="fas fa-envelope"></i> adnafaddamha@gmail.com</li>
+                                <li><i class="fab fa-whatsapp"></i> +62 895-4211-69504</li>
+                                <li><i class="fab fa-github"></i> github.com/Ahmaddaff</li>
+                                <li><i class="fab fa-linkedin"></i> linkedin.com/in/ahmad-da</li>
+                                <li><i class="fas fa-globe"></i> aboutdafanda.vercel.app</li>
+                            </ul>
+                        </section>
+
+                    </aside>
+                </div>
+            </article>
+
+        </div>
+    </section>
+
     <!-- CONTACT SECTION -->
     <section id="contact" class="py-24 bg-dark relative border-t border-white/10">
         <div class="max-w-4xl mx-auto px-4 text-center space-y-8">
@@ -2707,7 +3508,7 @@
                 </p>
             </div>
 
-            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 font-mono text-xs">
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 font-mono text-xs">
                 <a href="https://wa.me/62895421169504" target="_blank" rel="noopener noreferrer" class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-waGreen hover:bg-waGreen/10 transition-all group">
                     <i class="fab fa-whatsapp text-2xl text-waGreen mb-2 group-hover:scale-110 transition-transform"></i>
                     <div class="text-gray-400 text-[10px]">WhatsApp Direct</div>
@@ -2718,6 +3519,18 @@
                     <i class="fas fa-envelope text-2xl text-cyber mb-2 group-hover:scale-110 transition-transform"></i>
                     <div class="text-gray-400 text-[10px]">Email Official</div>
                     <div class="text-white font-bold mt-1">adnafaddamha@gmail.com</div>
+                </a>
+
+                <a href="https://github.com/Ahmaddaff" target="_blank" rel="noopener noreferrer" class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-cyber hover:bg-cyber/10 transition-all group">
+                    <i class="fab fa-github text-2xl text-cyber mb-2 group-hover:scale-110 transition-transform"></i>
+                    <div class="text-gray-400 text-[10px]">GitHub Profile</div>
+                    <div class="text-white font-bold mt-1">github.com/Ahmaddaff</div>
+                </a>
+
+                <a href="https://www.linkedin.com/in/ahmad-da-b1a960357" target="_blank" rel="noopener noreferrer" class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-cyber hover:bg-cyber/10 transition-all group">
+                    <i class="fab fa-linkedin text-2xl text-cyber mb-2 group-hover:scale-110 transition-transform"></i>
+                    <div class="text-gray-400 text-[10px]">LinkedIn Profile</div>
+                    <div class="text-white font-bold mt-1">in/ahmad-da</div>
                 </a>
 
                 <a href="https://www.instagram.com/siamatcuyy?psln=MXYwcDBpbXN5Zzd4Nw==" target="_blank" rel="noopener noreferrer" class="glass-panel p-5 rounded-2xl border border-white/10 hover:border-pink-400 hover:bg-pink-400/10 transition-all group">
@@ -2734,7 +3547,7 @@
             </div>
 
             <div class="pt-8 text-gray-500 font-mono text-xs">
-                © 2026 Ahmad Dafanda Abdullah. All rights reserved.
+                © 2026 Dafaverse · Ahmad Dafanda Abdullah. All rights reserved.
             </div>
 
         </div>
@@ -2836,6 +3649,7 @@
             pctLeader.textContent = `${leaderVal}%`;
             barTech.style.width = `${techVal}%`;
             barLeader.style.width = `${leaderVal}%`;
+            divider.setAttribute('aria-valuenow', String(techVal));
         }
 
         function animateSplit() {
@@ -2884,6 +3698,15 @@
         // Let the divider follow the pointer direction across the hero while idle.
         splitContainer.addEventListener('pointermove', (e) => {
             if (!isDragging && e.pointerType !== 'touch') updateSplit(e.clientX);
+            const rect = splitContainer.getBoundingClientRect();
+            splitContainer.style.setProperty('--glow-x', `${e.clientX - rect.left}px`);
+            splitContainer.style.setProperty('--glow-y', `${e.clientY - rect.top}px`);
+            // Parallax halus pada foto panggung (kedalaman)
+            if (stagePhotoWrapper && !prefersReducedMotion && e.pointerType !== 'touch') {
+                const nx = (e.clientX - rect.left) / rect.width - 0.5;
+                const ny = (e.clientY - rect.top) / rect.height - 0.5;
+                stagePhotoWrapper.style.transform = `translateX(-50%) translate(${nx * -12}px, ${ny * -8}px)`;
+            }
         });
 
         // Mobile touch support for slider
@@ -2910,6 +3733,8 @@
             'console': { id: 'cli-terminal', label: 'Developer Console CLI' },
             'iot': { id: 'iot-spirometry', label: 'Proyek Smart Spirometry IoT' },
             'spirometry': { id: 'iot-spirometry', label: 'Proyek Smart Spirometry IoT' },
+            'cv': { id: 'cv', label: 'CV & Ringkasan Profesional' },
+            'resume': { id: 'cv', label: 'CV & Ringkasan Profesional' },
             'publications': { id: 'publications', label: 'Publikasi Jurnal Ilmiah' },
             'publikasi': { id: 'publications', label: 'Publikasi Jurnal Ilmiah' },
             'jurnal': { id: 'publications', label: 'Publikasi Jurnal Ilmiah' },
@@ -2926,24 +3751,23 @@
         };
 
         const commands = {
-            'help': 'Commands: <span class="text-cyber">explore</span>, <span class="text-cyber">go/open/visit &lt;section&gt;</span>, <span class="text-cyber">cat cv.json</span>, <span class="text-cyber">academic</span>, <span class="text-gold">leadership</span>, <span class="text-gold">journals</span>, <span class="text-neonGreen">spirometry</span>, <span class="text-white">skills</span>, <span class="text-waGreen">contact</span>, <span class="text-red-400">clear</span><br>Sections: <span class="text-gray-400">home, academic, leadership, terminal, iot, publications, experience, journey, skills, contact</span>',
-            'explore': '<span class="text-cyber font-bold">WEBSITE MAP</span><br><span class="text-gray-400">home</span> — Beranda &amp; slider profil<br><span class="text-gray-400">academic</span> — Tampilan Digital Architect penuh<br><span class="text-gray-400">leadership</span> — Tampilan Legislative Leader penuh<br><span class="text-gray-400">terminal</span> — Developer Console CLI<br><span class="text-gray-400">iot</span> — Smart Spirometry<br><span class="text-gray-400">publications</span> — Publikasi jurnal<br><span class="text-gray-400">experience</span> — Pengalaman &amp; organisasi<br><span class="text-gray-400">journey</span> — Navigator rekam jejak<br><span class="text-gray-400">skills</span> — Keahlian &amp; kompetensi<br><span class="text-gray-400">contact</span> — Kontak &amp; kolaborasi<br><br>Ketik <span class="text-cyber font-bold">go &lt;section&gt;</span> untuk membuka bagian, contoh: <span class="text-white">go iot</span>.',
+            'help': 'Commands: <span class="text-cyber">explore</span>, <span class="text-cyber">go/open/visit &lt;section&gt;</span>, <span class="text-cyber">cat cv.json</span>, <span class="text-cyber">academic</span>, <span class="text-gold">leadership</span>, <span class="text-gold">journals</span>, <span class="text-neonGreen">spirometry</span>, <span class="text-white">skills</span>, <span class="text-waGreen">contact</span>, <span class="text-red-400">clear</span><br>Sections: <span class="text-gray-400">home, academic, leadership, terminal, iot, publications, experience, journey, skills, cv, contact</span>',
+            'explore': '<span class="text-cyber font-bold">WEBSITE MAP</span><br><span class="text-gray-400">home</span> — Beranda &amp; slider profil<br><span class="text-gray-400">academic</span> — Tampilan Digital Architect penuh<br><span class="text-gray-400">leadership</span> — Tampilan Legislative Leader penuh<br><span class="text-gray-400">terminal</span> — Developer Console CLI<br><span class="text-gray-400">iot</span> — Smart Spirometry<br><span class="text-gray-400">publications</span> — Publikasi jurnal<br><span class="text-gray-400">experience</span> — Pengalaman &amp; organisasi<br><span class="text-gray-400">journey</span> — Navigator rekam jejak<br><span class="text-gray-400">skills</span> — Keahlian &amp; kompetensi<br><span class="text-gray-400">cv</span> — CV &amp; ringkas profesional<br><span class="text-gray-400">contact</span> — Kontak &amp; kolaborasi<br><br>Ketik <span class="text-cyber font-bold">go &lt;section&gt;</span> untuk membuka bagian, contoh: <span class="text-white">go iot</span>.',
             'cat cv.json': `<pre class="text-cyber text-[11px] font-mono leading-tight">
 {
   "name": "Ahmad Dafanda Abdullah",
   "education": "S1 Teknologi Informasi - Universitas Amikom Purwokerto",
   "current_role": "Ketua Umum Senat Mahasiswa 2026",
   "focus": ["Web Engineering", "Low-Budget Medical IoT", "Public Speaking"],
-  "contacts": { "email": "adnafaddamha@gmail.com", "phone": "+62 895-4116-9504" }
+  "contacts": { "email": "adnafaddamha@gmail.com", "phone": "+62 895-4211-69504" }
 }</pre>`,
             'academic': '🎓 S1 TI Universitas Amikom Purwokerto | Creator Smart Spirometry | Penulis artikel Aksi Kolektif & IJOMSS',
             'leadership': '👑 Ketua Umum Senat Mahasiswa 2026 | Chief Field Coordinator TECH4FEST 2026 | Ketua Pelaksana FIK Got Talent 2025',
             'journals': '📜 Peningkatan Literasi IoT Melalui Simulasi Wokwi (Aksi Kolektif, 2025) & Sistem Pelaporan Kerusakan Fasilitas Kampus (IJOMSS, 2026). Ketik go publications untuk melihat detail.',
             'spirometry': '🫁 Smart Spirometry: Low-budget medical device using modified waterflow sensor. Demo: ungu.in/smartspirometry',
             'skills': '⚙️ Leadership, Web Development, Waterflow Telemetry, Public Relations, Strategic Problem Solving',
-            'contact': '📲 WhatsApp: +62 895-4116-9504 | Email: adnafaddamha@gmail.com'
+            'contact': '📲 WhatsApp: +62 895-4211-69504 | Email: adnafaddamha@gmail.com'
         };
-        commands.academic = 'Universitas Amikom Purwokerto';
 
         function executeCommand(cmd) {
             cmd = cmd.trim().toLowerCase();
@@ -2979,7 +3803,12 @@
                         if (destination.split !== undefined) {
                             setSplitPercent(destination.split);
                         }
-                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        const destinationScreen = spaScreens.findIndex(screen => screen.id === destination.id);
+                        if (destinationScreen >= 0) {
+                            showSpaScreen(destinationScreen);
+                        } else {
+                            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
                     } else {
                         responseEntry.textContent = `Section unavailable: "${destinationName}".`;
                     }
@@ -3286,7 +4115,7 @@
         const spaHashLinks = [...document.querySelectorAll('a[href^="#"]')].filter(link => link.hash);
         const menuToggle = document.getElementById('menu-toggle');
         const mobileMenu = document.getElementById('mobile-menu');
-        const spaLabels = ['Beranda', 'Terminal', 'Proyek IoT', 'Publikasi', 'Pengalaman', 'Perjalanan', 'Keahlian', 'Kontak'];
+        const spaLabels = ['Beranda', 'Terminal', 'Proyek IoT', 'Publikasi', 'Pengalaman', 'Perjalanan', 'Keahlian', 'CV', 'Kontak'];
         const spaCurrentIndex = document.getElementById('spa-current-index');
         const spaTotalCount = document.getElementById('spa-total-count');
         const spaCurrentLabel = document.getElementById('spa-current-label');
@@ -3367,7 +4196,10 @@
                 loaderFinished = true;
                 clearInterval(loaderProgressTimer);
                 loaderPercent.textContent = '100%';
-                if (spaIndex === 0) document.getElementById('hero-split-container')?.classList.add('intro-zoom');
+                if (spaIndex === 0) {
+                    document.getElementById('hero-split-container')?.classList.add('intro-zoom');
+                    if (typeof startHeroScramble === 'function') startHeroScramble();
+                }
                 siteLoader.classList.add('is-loaded');
                 setTimeout(() => siteLoader.remove(), 700);
             }, remaining);
@@ -3378,8 +4210,604 @@
         // --- 7. UTILITIES ---
         function copyCitation(text) {
             navigator.clipboard.writeText(text);
-            alert('Sitasi berhasil disalin ke clipboard!');
+            showToast('Sitasi berhasil disalin ke clipboard!', 'fas fa-quote-right');
         }
+
+        // --- 9. MODERN EFFECTS (v2) ---
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        /* 9a. Scramble/decode effect pada judul hero */
+        const SCRAMBLE_CHARS = '01<>[]{}/\\|=+*#$%&';
+        function scrambleText(el, duration = 700) {
+            const original = el.dataset.scrambleOriginal || el.textContent;
+            el.dataset.scrambleOriginal = original;
+            if (prefersReducedMotion || !original) return;
+            const startTime = performance.now();
+            const frame = (now) => {
+                const progress = Math.min(1, (now - startTime) / duration);
+                const revealCount = Math.floor(progress * original.length);
+                let output = '';
+                for (let i = 0; i < original.length; i++) {
+                    if (i < revealCount || original[i] === ' ') {
+                        output += original[i];
+                    } else {
+                        output += SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+                    }
+                }
+                el.textContent = output;
+                if (progress < 1) requestAnimationFrame(frame);
+                else el.textContent = original;
+            };
+            requestAnimationFrame(frame);
+        }
+
+        function startHeroScramble() {
+            document.querySelectorAll('#hero-split-container h1 span').forEach((el, index) => {
+                setTimeout(() => scrambleText(el, 700), index * 180);
+            });
+        }
+
+        /* 9b. Statistik dengan hitungan animasi (count-up) */
+        function animateCounter(el) {
+            const target = parseFloat(el.dataset.countTo || '0');
+            const suffix = el.dataset.countSuffix || '';
+            if (prefersReducedMotion) {
+                el.innerHTML = `${target}<span class="stat-suffix">${suffix}</span>`;
+                return;
+            }
+            const duration = 900;
+            const startTime = performance.now();
+            const frame = (now) => {
+                const progress = Math.min(1, (now - startTime) / duration);
+                const eased = 1 - Math.pow(1 - progress, 3);
+                const value = Math.round(target * eased);
+                el.innerHTML = `${value}<span class="stat-suffix">${suffix}</span>`;
+                if (progress < 1) requestAnimationFrame(frame);
+            };
+            requestAnimationFrame(frame);
+        }
+
+        document.querySelectorAll('.stat-num').forEach(el => {
+            const finalText = el.textContent.trim();
+            el.dataset.countTo = String(parseFloat(finalText) || 0);
+            el.dataset.countSuffix = finalText.replace(/^[0-9.]+/, '');
+            if (!prefersReducedMotion) el.textContent = '0';
+        });
+
+        if ('IntersectionObserver' in window) {
+            const statObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        animateCounter(entry.target);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.35 });
+            document.querySelectorAll('.stat-num').forEach(el => statObserver.observe(el));
+        } else {
+            document.querySelectorAll('.stat-num').forEach(el => animateCounter(el));
+        }
+
+        /* 9c. Tilt 3D + spotlight mengikuti kursor */
+        function attachTilt(el, maxDeg = 5) {
+            if (prefersReducedMotion) return;
+            el.classList.add('tilt-card');
+            el.addEventListener('pointermove', (e) => {
+                if (e.pointerType === 'touch') return;
+                const rect = el.getBoundingClientRect();
+                const px = (e.clientX - rect.left) / rect.width;
+                const py = (e.clientY - rect.top) / rect.height;
+                el.style.setProperty('--mx', `${px * 100}%`);
+                el.style.setProperty('--my', `${py * 100}%`);
+                el.style.transform = `perspective(900px) rotateX(${(0.5 - py) * maxDeg}deg) rotateY(${(px - 0.5) * maxDeg}deg) scale(1.012)`;
+            });
+            el.addEventListener('pointerleave', () => { el.style.transform = ''; });
+        }
+        document.querySelectorAll('#publications .publication-card, #journey-navigator .journey-detail, #skills-section .glass-panel')
+            .forEach(el => attachTilt(el));
+
+        /* 9d. Tombol menu "magnet" — sedikit mengikuti kursor (pakai variabel menuToggle yang sudah ada) */
+        if (menuToggle && !prefersReducedMotion) {
+            menuToggle.addEventListener('pointermove', (e) => {
+                if (e.pointerType === 'touch') return;
+                const rect = menuToggle.getBoundingClientRect();
+                const dx = e.clientX - (rect.left + rect.width / 2);
+                const dy = e.clientY - (rect.top + rect.height / 2);
+                menuToggle.style.transform = `translate(${dx * 0.18}px, ${dy * 0.22}px)`;
+            });
+            menuToggle.addEventListener('pointerleave', () => { menuToggle.style.transform = ''; });
+        }
+
+        // --- 10. CREATIVE LAYER (v3) ---
+        let partyMode = false;
+
+        /* 10a. Toast notifications — dipanggil copyCitation & aksi cepat lainnya */
+        const stagePhotoWrapper = document.getElementById('stage-photo-container');
+        const toastStack = document.getElementById('toast-stack');
+
+        function showToast(message, icon = 'fas fa-circle-info', duration = 3400) {
+            if (!toastStack) return;
+            while (toastStack.children.length >= 3) toastStack.firstElementChild.remove();
+            const toast = document.createElement('div');
+            toast.className = 'toast';
+            toast.setAttribute('role', 'status');
+            const iconEl = document.createElement('i');
+            iconEl.className = `toast-icon ${icon}`;
+            iconEl.setAttribute('aria-hidden', 'true');
+            const label = document.createElement('span');
+            label.textContent = message;
+            toast.append(iconEl, label);
+            let dismissTimer = null;
+            const dismiss = () => {
+                if (toast.dataset.closing) return;
+                toast.dataset.closing = '1';
+                clearTimeout(dismissTimer);
+                toast.classList.remove('is-visible');
+                setTimeout(() => toast.remove(), 320);
+            };
+            toast.addEventListener('click', dismiss);
+            toastStack.appendChild(toast);
+            requestAnimationFrame(() => toast.classList.add('is-visible'));
+            dismissTimer = setTimeout(dismiss, duration);
+        }
+
+        /* 10b. Palet perintah cepat (Ctrl + K) */
+        const cmdkRoot = document.getElementById('cmdk');
+        const cmdkInput = document.getElementById('cmdk-input');
+        const cmdkList = document.getElementById('cmdk-list');
+        const cmdkTrigger = document.getElementById('cmdk-trigger');
+        const cmdkIcons = ['fas fa-house', 'fas fa-terminal', 'fas fa-microchip', 'fas fa-book-open', 'fas fa-briefcase', 'fas fa-route', 'fas fa-code', 'fas fa-file-lines', 'fas fa-paper-plane'];
+        let cmdkItems = [];
+        let cmdkMatches = [];
+        let cmdkSelectedIndex = 0;
+        let cmdkOpen = false;
+        let cmdkLastFocus = null;
+
+        const cmdkActionItems = [
+            {
+                icon: 'fas fa-copy',
+                label: 'Salin alamat email',
+                hint: 'adnafaddamha@gmail.com',
+                keywords: 'email mail surel alamat salin',
+                run: () => {
+                    navigator.clipboard.writeText('adnafaddamha@gmail.com')
+                        .then(() => showToast('Email disalin ke clipboard', 'fas fa-copy'))
+                        .catch(() => showToast('Gagal menyalin email', 'fas fa-triangle-exclamation'));
+                }
+            },
+            {
+                icon: 'fa-brands fa-whatsapp',
+                label: 'Chat via WhatsApp',
+                hint: 'wa.me/62895421169504',
+                keywords: 'whatsapp wa chat pesan hubungi nomor telepon',
+                run: () => {
+                    window.open('https://wa.me/62895421169504', '_blank', 'noopener');
+                    showToast('Membuka WhatsApp...', 'fa-brands fa-whatsapp');
+                }
+            },
+            {
+                icon: 'fas fa-quote-right',
+                label: 'Salin sitasi publikasi',
+                hint: 'Jurnal 2025',
+                keywords: 'sitasi citation kutipan publikasi jurnal referensi',
+                run: () => {
+                    copyCitation('Abdullah, Ahmad Dafanda, et al. (2025). Peningkatan Literasi IoT Melalui Simulasi Wokwi Bagi Siswa SMP Muhammadiyah 1 Purwokerto. Aksi Kolektif: Jurnal Pengabdian, 2(1), 51-57. https://glonus.org/index.php/aksikolektif/article/view/331');
+                }
+            },
+            {
+                icon: 'fas fa-arrows-left-right',
+                label: 'Reset tampilan hero (50/50)',
+                hint: 'Tengah',
+                keywords: 'reset hero tengah split rasio tampilan keseimbangan',
+                run: () => {
+                    setSplitPercent(50);
+                    showToast('Tampilan hero direset 50/50', 'fas fa-arrows-left-right');
+                }
+            },
+            {
+                icon: 'fas fa-arrow-up',
+                label: 'Gulir ke atas',
+                hint: 'Atas',
+                keywords: 'atas scroll gulir top awal layar',
+                run: () => {
+                    const active = spaScreens[spaIndex];
+                    if (active) active.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
+                }
+            }
+        ];
+
+        function buildCmdkItems() {
+            const navItems = spaLabels.map((label, index) => ({
+                group: 'Navigasi',
+                icon: cmdkIcons[index] || 'fas fa-circle',
+                label,
+                hint: String(index + 1).padStart(2, '0'),
+                keywords: `${label.toLowerCase()} ${spaScreens[index] ? spaScreens[index].id : ''} section layar navigasi`,
+                run: () => showSpaScreen(index)
+            }));
+            return [...navItems, ...cmdkActionItems];
+        }
+
+        function renderCmdk(query) {
+            const q = query.trim().toLowerCase();
+            cmdkMatches = cmdkItems.filter(item => !q || item.label.toLowerCase().includes(q) || (item.keywords || '').includes(q));
+            cmdkList.innerHTML = '';
+            if (!cmdkMatches.length) {
+                const empty = document.createElement('li');
+                empty.className = 'cmdk-empty';
+                empty.textContent = `Tidak ada hasil untuk "${query}"`;
+                cmdkList.appendChild(empty);
+                return;
+            }
+            let currentGroup = null;
+            cmdkMatches.forEach((item, index) => {
+                if (item.group && item.group !== currentGroup) {
+                    currentGroup = item.group;
+                    const header = document.createElement('li');
+                    header.className = 'cmdk-group';
+                    header.textContent = item.group;
+                    cmdkList.appendChild(header);
+                }
+                const li = document.createElement('li');
+                li.className = 'cmdk-item';
+                li.setAttribute('role', 'option');
+                li.setAttribute('aria-selected', index === 0 ? 'true' : 'false');
+                const icon = document.createElement('i');
+                icon.className = item.icon;
+                icon.setAttribute('aria-hidden', 'true');
+                const label = document.createElement('span');
+                label.className = 'cmdk-item-label';
+                label.textContent = item.label;
+                li.append(icon, label);
+                if (item.hint) {
+                    const hint = document.createElement('span');
+                    hint.className = 'cmdk-item-hint';
+                    hint.textContent = item.hint;
+                    li.appendChild(hint);
+                }
+                li.addEventListener('click', () => runCmdkItem(cmdkMatches[index]));
+                li.addEventListener('mousemove', () => setCmdkSelection(index, false));
+                cmdkList.appendChild(li);
+            });
+            setCmdkSelection(0, false);
+        }
+
+        function setCmdkSelection(index, scroll = true) {
+            const items = cmdkList.querySelectorAll('.cmdk-item');
+            if (!items.length) { cmdkSelectedIndex = 0; return; }
+            cmdkSelectedIndex = Math.max(0, Math.min(index, items.length - 1));
+            items.forEach((el, i) => {
+                const selected = i === cmdkSelectedIndex;
+                el.classList.toggle('is-selected', selected);
+                el.setAttribute('aria-selected', selected ? 'true' : 'false');
+            });
+            if (scroll) items[cmdkSelectedIndex].scrollIntoView({ block: 'nearest' });
+        }
+
+        function openCmdk() {
+            if (!cmdkRoot || cmdkOpen) return;
+            cmdkItems = buildCmdkItems();
+            cmdkLastFocus = document.activeElement;
+            cmdkOpen = true;
+            cmdkRoot.hidden = false;
+            requestAnimationFrame(() => cmdkRoot.classList.add('is-open'));
+            cmdkInput.value = '';
+            renderCmdk('');
+            cmdkInput.focus();
+            if (mobileMenu.classList.contains('is-open')) {
+                mobileMenu.classList.remove('is-open');
+                menuToggle.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        function closeCmdk() {
+            if (!cmdkRoot || !cmdkOpen) return;
+            cmdkOpen = false;
+            cmdkRoot.classList.remove('is-open');
+            setTimeout(() => { cmdkRoot.hidden = true; }, prefersReducedMotion ? 0 : 220);
+            if (cmdkLastFocus && cmdkLastFocus.isConnected) cmdkLastFocus.focus();
+        }
+
+        function runCmdkItem(item) {
+            if (!item) return;
+            closeCmdk();
+            setTimeout(item.run, prefersReducedMotion ? 0 : 140);
+        }
+
+        if (cmdkInput && cmdkList) {
+            cmdkInput.addEventListener('input', () => renderCmdk(cmdkInput.value));
+            cmdkInput.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowDown') { e.preventDefault(); setCmdkSelection(cmdkSelectedIndex + 1); }
+                else if (e.key === 'ArrowUp') { e.preventDefault(); setCmdkSelection(cmdkSelectedIndex - 1); }
+                else if (e.key === 'Enter') {
+                    e.preventDefault();
+                    runCmdkItem(cmdkMatches[cmdkSelectedIndex]);
+                }
+                else if (e.key === 'Home') { e.preventDefault(); setCmdkSelection(0); }
+                else if (e.key === 'End') { e.preventDefault(); setCmdkSelection(999); }
+            });
+        }
+        if (cmdkRoot) cmdkRoot.querySelectorAll('[data-cmd-close]').forEach(el => el.addEventListener('click', closeCmdk));
+        if (cmdkTrigger) cmdkTrigger.addEventListener('click', openCmdk);
+        window.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                e.preventDefault();
+                if (cmdkOpen) closeCmdk(); else openCmdk();
+            } else if (e.key === 'Escape' && cmdkOpen) {
+                closeCmdk();
+            }
+        });
+
+        /* 10c. Sensor field — partikel & mesh jaringan IoT di panel teknologi */
+        function initSensorField() {
+            const canvas = document.getElementById('sensor-field');
+            const panel = canvas ? canvas.parentElement : null;
+            if (!canvas || !panel || prefersReducedMotion) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+            let width = 0;
+            let height = 0;
+            let particles = [];
+            let raf = null;
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+            const LINK_DIST = 120;
+
+            const resize = () => {
+                const rect = panel.getBoundingClientRect();
+                width = Math.max(1, rect.width);
+                height = Math.max(1, rect.height);
+                canvas.width = Math.round(width * dpr);
+                canvas.height = Math.round(height * dpr);
+                canvas.style.width = `${width}px`;
+                canvas.style.height = `${height}px`;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            };
+
+            const spawn = () => {
+                const count = Math.max(16, Math.min(46, Math.round((width * height) / 15000)));
+                particles = Array.from({ length: count }, () => ({
+                    x: Math.random() * width,
+                    y: Math.random() * height,
+                    vx: (Math.random() - 0.5) * 0.34,
+                    vy: (Math.random() - 0.5) * 0.34,
+                    r: Math.random() * 1.6 + 1
+                }));
+            };
+
+            const draw = () => {
+                ctx.clearRect(0, 0, width, height);
+                ctx.lineWidth = 1;
+                for (let i = 0; i < particles.length; i++) {
+                    const a = particles[i];
+                    for (let j = i + 1; j < particles.length; j++) {
+                        const b = particles[j];
+                        const dx = a.x - b.x;
+                        const dy = a.y - b.y;
+                        const dist = Math.hypot(dx, dy);
+                        if (dist < LINK_DIST) {
+                            ctx.strokeStyle = `rgba(123, 0, 5, ${(0.14 * (1 - dist / LINK_DIST)).toFixed(3)})`;
+                            ctx.beginPath();
+                            ctx.moveTo(a.x, a.y);
+                            ctx.lineTo(b.x, b.y);
+                            ctx.stroke();
+                        }
+                    }
+                }
+                ctx.fillStyle = 'rgba(212, 180, 139, 0.9)';
+                particles.forEach(p => {
+                    p.x += p.vx;
+                    p.y += p.vy;
+                    if (p.x < 0 || p.x > width) p.vx *= -1;
+                    if (p.y < 0 || p.y > height) p.vy *= -1;
+                    ctx.beginPath();
+                    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+                    ctx.fill();
+                });
+                raf = requestAnimationFrame(draw);
+            };
+
+            const start = () => {
+                if (raf !== null) return;
+                const rect = panel.getBoundingClientRect();
+                if (Math.round(rect.width) !== Math.round(width) || Math.round(rect.height) !== Math.round(height)) {
+                    resize();
+                    spawn();
+                }
+                raf = requestAnimationFrame(draw);
+            };
+            const stop = () => {
+                if (raf !== null) {
+                    cancelAnimationFrame(raf);
+                    raf = null;
+                }
+            };
+
+            resize();
+            spawn();
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver(entries => {
+                    entries.forEach(entry => (entry.isIntersecting ? start() : stop()));
+                }, { threshold: 0.05 }).observe(panel);
+            } else {
+                start();
+            }
+            window.addEventListener('resize', () => { resize(); spawn(); });
+        }
+
+        /* 10d. Denyut ECG di tepi bawah hero */
+        function initHeroEcg() {
+            const canvas = document.getElementById('hero-ecg');
+            if (!canvas || prefersReducedMotion) return;
+            const ctx = canvas.getContext('2d');
+            if (!ctx) return;
+            const panelTechEl = document.querySelector('.panel-tech');
+            let width = 0;
+            let height = 0;
+            let raf = null;
+            let phase = 0;
+            let last = performance.now();
+            const dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+            const resize = () => {
+                const rect = canvas.getBoundingClientRect();
+                width = Math.max(1, rect.width);
+                height = Math.max(1, rect.height);
+                canvas.width = Math.round(width * dpr);
+                canvas.height = Math.round(height * dpr);
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            };
+
+            // Satu siklus denyut: gelombang P, kompleks QRS, gelombang T
+            const ecgValue = (t) => {
+                const gauss = (center, spread, amp) => amp * Math.exp(-Math.pow((t - center) / spread, 2));
+                return gauss(0.16, 0.022, 0.18)
+                    - gauss(0.30, 0.008, 0.12)
+                    + gauss(0.335, 0.010, 1.0)
+                    - gauss(0.37, 0.011, 0.30)
+                    + gauss(0.55, 0.045, 0.30);
+            };
+
+            const draw = (now) => {
+                const dt = Math.min(0.05, (now - last) / 1000);
+                last = now;
+                phase = (phase + dt * (partyMode ? 1.9 : 1)) % 1;
+                const baseline = height * 0.62;
+                const amp = height * 0.5;
+                ctx.clearRect(0, 0, width, height);
+                ctx.beginPath();
+                for (let px = 0; px <= width; px += 2) {
+                    const t = (px / width + phase) % 1;
+                    const y = baseline - ecgValue(t) * amp;
+                    if (px === 0) ctx.moveTo(px, y);
+                    else ctx.lineTo(px, y);
+                }
+                // Warna garis menyesuaikan background di belakangnya:
+                // - Desktop (hero split kiri-kanan): maroon di area krem (kiri), krem-emas di area
+                //   maroon (kanan); batas perpindahan mengikuti divider split yang bisa digeser.
+                // - Mobile (hero stack vertikal, clip-path:none): seluruh kanvas berada di panel
+                //   maroon -> garis krem-emas penuh.
+                const stackedHero = panelTechEl ? getComputedStyle(panelTechEl).clipPath === 'none' : false;
+                const splitRaw = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--split'));
+                const splitFrac = Math.min(1, Math.max(0, (Number.isFinite(splitRaw) ? splitRaw : 50) / 100));
+                const band = 0.035; // lebar zona peralihan warna (±3.5% lebar canvas)
+                const strokeGradient = ctx.createLinearGradient(0, 0, width, 0);
+                if (stackedHero) {
+                    strokeGradient.addColorStop(0, 'rgba(244, 230, 197, 0.95)');
+                    strokeGradient.addColorStop(1, 'rgba(244, 230, 197, 0.95)');
+                } else {
+                    strokeGradient.addColorStop(0, 'rgba(123, 0, 5, 0.95)');
+                    strokeGradient.addColorStop(Math.max(0, splitFrac - band), 'rgba(123, 0, 5, 0.95)');
+                    strokeGradient.addColorStop(Math.min(1, splitFrac + band), 'rgba(244, 230, 197, 0.95)');
+                    strokeGradient.addColorStop(1, 'rgba(244, 230, 197, 0.95)');
+                }
+                ctx.save();
+                ctx.shadowColor = 'rgba(255, 214, 150, 0.4)';
+                ctx.shadowBlur = 6;
+                ctx.strokeStyle = strokeGradient;
+                ctx.lineWidth = 2.2;
+                ctx.lineJoin = 'round';
+                ctx.stroke();
+                ctx.restore();
+                // Titik "now" di ujung kanan — warnanya menyesuaikan background sisi tersebut
+                const yEnd = baseline - ecgValue(phase) * amp;
+                const rightEdgeOnCream = !stackedHero && splitFrac > 0.97;
+                ctx.fillStyle = rightEdgeOnCream ? 'rgba(123, 0, 5, 0.95)' : 'rgba(244, 230, 197, 0.95)';
+                ctx.beginPath();
+                ctx.arc(width - 1, yEnd, 2.6, 0, Math.PI * 2);
+                ctx.fill();
+                raf = requestAnimationFrame(draw);
+            };
+
+            resize();
+            const run = () => {
+                if (raf === null) {
+                    last = performance.now();
+                    raf = requestAnimationFrame(draw);
+                }
+            };
+            const halt = () => {
+                if (raf !== null) {
+                    cancelAnimationFrame(raf);
+                    raf = null;
+                }
+            };
+            if ('IntersectionObserver' in window) {
+                new IntersectionObserver(entries => {
+                    entries.forEach(entry => (entry.isIntersecting ? run() : halt()));
+                }, { threshold: 0.05 }).observe(canvas);
+            } else {
+                run();
+            }
+            window.addEventListener('resize', resize);
+        }
+
+        /* 10e. Jam sistem live (WIB, UTC+7) */
+        function initHeroClock() {
+            const el = document.getElementById('hero-clock-text');
+            if (!el) return;
+            const pad = n => String(n).padStart(2, '0');
+            const tick = () => {
+                const now = new Date();
+                const wib = new Date(now.getTime() + (now.getTimezoneOffset() + 420) * 60000);
+                el.textContent = `${pad(wib.getHours())}:${pad(wib.getMinutes())}:${pad(wib.getSeconds())}`;
+            };
+            tick();
+            setInterval(tick, 1000);
+        }
+
+        /* 10f. Divider split-screen bisa dioperasikan via keyboard */
+        if (divider) {
+            divider.addEventListener('keydown', (e) => {
+                let next = null;
+                if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') next = targetSplit - 3;
+                else if (e.key === 'ArrowRight' || e.key === 'ArrowUp') next = targetSplit + 3;
+                else if (e.key === 'Home') next = 0;
+                else if (e.key === 'End') next = 100;
+                else if (e.key.toLowerCase() === 'c') next = 50;
+                if (next !== null) {
+                    e.preventDefault();
+                    setSplitPercent(Math.max(0, Math.min(100, Math.round(next * 10) / 10)));
+                }
+            });
+        }
+
+        /* 10g. Easter egg — ketik "dafanda" di mana saja untuk party mode */
+        const PARTY_SECRET = 'dafanda';
+        let partyTyped = '';
+        window.addEventListener('keydown', (e) => {
+            if (cmdkOpen) return;
+            if (e.ctrlKey || e.metaKey || e.altKey) return;
+            const target = e.target;
+            const tag = target && target.tagName ? target.tagName.toLowerCase() : '';
+            if (tag === 'input' || tag === 'textarea' || (target && target.isContentEditable)) return;
+            if (e.key.length !== 1) return;
+            partyTyped = (partyTyped + e.key.toLowerCase()).slice(-PARTY_SECRET.length);
+            if (partyTyped === PARTY_SECRET) {
+                partyTyped = '';
+                partyMode = !partyMode;
+                document.body.classList.toggle('party', partyMode);
+                showToast(
+                    partyMode ? 'PARTY MODE AKTIF - tetap semangat, Dafanda!' : 'Party mode dinonaktifkan',
+                    partyMode ? 'fas fa-champagne-glasses' : 'fas fa-power-off'
+                );
+            }
+        });
+
+        /* 10h. Unduh CV sebagai PDF melalui dialog cetak browser */
+        function downloadCV() {
+            showToast('Pada dialog cetak, pilih "Save as PDF"', 'fas fa-print');
+            setTimeout(() => {
+                try {
+                    window.print();
+                } catch (error) {
+                    showToast('Dialog cetak tidak tersedia di browser ini', 'fas fa-triangle-exclamation');
+                }
+            }, 450);
+        }
+
+        initSensorField();
+        initHeroEcg();
+        initHeroClock();
     </script>
 </body>
 </html>
