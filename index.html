@@ -895,7 +895,15 @@
         body [class~="text-[8px]"] { font-size: 0.625rem !important; line-height: 1.4; }
 
         @media (max-width: 767px) {
-            #hero-split-container { min-height: 960px; }
+            /* HP: hero ditumpuk vertikal (tech di atas, leadership di bawah).
+               Panel memakai alur flex -> tinggi mengikuti konten, tidak lagi
+               50%/50% yang membuat isi panel terpotong saat konten lebih tinggi. */
+            #hero-split-container {
+                display: flex;
+                flex-direction: column;
+                min-height: calc(100dvh - 56px);
+                padding-top: 0;
+            }
             .hero-copy-flow { height: auto; padding-top: 0; }
             .hero-copy-flow .font-mono > span {
                 justify-content: flex-start;
@@ -903,25 +911,32 @@
             }
             .hero-photo-shape { display: none; }
             #hero-split-container .hero-panel {
-                inset: auto 0 50%;
-                height: 50%;
+                position: relative;
+                inset: auto;
+                width: 100%;
+                height: auto;
+                flex: 1 0 auto;
                 justify-content: flex-start;
             }
-            #hero-split-container .panel-tech {
-                top: 0;
-                bottom: auto;
-                clip-path: none;
-            }
+            /* Di HP urutan DOM (leadership lebih dulu) dibalik: panel tech
+               (Akademik) tampil di atas seperti versi desktop (panel kiri). */
+            #hero-split-container .panel-tech { order: -1; }
+            #hero-split-container .panel-tech,
             #hero-split-container .panel-leadership {
-                top: 50%;
-                bottom: 0;
+                top: auto;
+                bottom: auto;
             }
-            #hero-split-container .hero-panel .max-w-7xl {
-                align-items: center;
-                padding-top: 1.5rem;
-                padding-bottom: 1.5rem;
+            #hero-split-container .panel-tech { clip-path: none; }
+            /* Wrapper panel memakai kelas Tailwind max-w-[1400px] (bukan max-w-7xl),
+               jadi selector lama sebelumnya tidak pernah kena. Padding vertical
+               diberikan di sini agar isi panel tidak mepet tepi. */
+            #hero-split-container .hero-panel .max-w-\[1400px\] {
+                padding-top: 0.7rem;
+                padding-bottom: 0.7rem;
             }
-            #hero-split-container .hero-copy-flow { gap: 0.75rem; }
+            /* Jarak antar-blok di HP dari Tailwind space-y-4 (margin) — diringkas
+               agar hero muat satu layar tanpa terpotong. */
+            #hero-split-container .hero-copy-flow > * + * { margin-top: 0.55rem; }
             #hero-split-container .panel-leadership .text-right {
                 text-align: left;
                 align-items: flex-start;
@@ -935,7 +950,18 @@
             #hero-split-container h1 { font-size: clamp(2.35rem, 10vw, 3.6rem); }
             #hero-split-container .stage-photo-wrapper,
             #split-divider,
-            #hero-split-container > .absolute { display: none; }
+            .split-divider-visual,
+            #hero-split-container .hero-logo-pair-leadership,
+            #hero-split-container > .absolute,
+            .hero-ecg { display: none; }
+        }
+
+        /* ===== Keterbacaan teks di HP (<=767px) =====
+           Beberapa ukuran memakai clamp/vw yang jatuh ke batas bawah (10.2-10.6px)
+           pada layar ponsel — terlalu kecil untuk dibaca. Diperbesar hanya di HP;
+           tampilan desktop & print tidak disentuh. */
+        @media (max-width: 767px) {
+            #publications .publication-journal-badge { font-size: 0.75rem; }
         }
 
         /* Refined editorial-tech surfaces in the existing cream and maroon palette. */
@@ -2760,6 +2786,18 @@
             line-height: 1.6;
         }
         .cv-cite em { color: #2b0d10; font-style: italic; }
+
+        /* Keterbacaan CV di HP (<=767px): meta kecil (0.64-0.72rem) diperbesar
+           sedikit agar nyaman dibaca di ponsel. Diletakkan SETELAH rule dasar CV
+           agar menang cascade; print & desktop tidak terkena. */
+        @media (max-width: 767px) {
+            .cv-role { font-size: 0.75rem; }
+            .cv-head-meta { font-size: 0.72rem; }
+            .cv-block-title { font-size: 0.75rem; }
+            .cv-entry-date { font-size: 0.72rem; }
+            .cv-contact-list li { font-size: 0.78rem; }
+            .cv-cite { font-size: 0.78rem; }
+        }
 
         /* ===== P0: CV saat dicetak / disimpan sebagai PDF ===== */
         @media print {
